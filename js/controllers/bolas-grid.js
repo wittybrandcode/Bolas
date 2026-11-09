@@ -323,6 +323,26 @@ var BolasGrid = (function() {
         }
 
         // Break All
+        // Toggle Viewport Guides (FEAT-04)
+        var guidesBtn = document.getElementById('guidesBtn');
+        if (guidesBtn) {
+            guidesBtn.addEventListener('click', function(e) {
+                addRipple(guidesBtn, e);
+                if (typeof HostService !== 'undefined' && HostService.toggleVisualGuides) {
+                    HostService.toggleVisualGuides().then(function(res) {
+                        if (res && res.success) {
+                            guidesBtn.classList.toggle('active', res.enabled);
+                            if (typeof StatusBar !== 'undefined') {
+                                StatusBar.success(res.message);
+                            }
+                        } else if (res && typeof StatusBar !== 'undefined') {
+                            StatusBar.warning(res.error || 'Guides unavailable');
+                        }
+                    });
+                }
+            });
+        }
+
         var breakAllBtn = document.getElementById('breakAllBtn');
         if (breakAllBtn) {
             breakAllBtn.addEventListener('click', function(e) {
@@ -396,7 +416,8 @@ var BolasGrid = (function() {
             var classes = 'chain-item ' + roleType;
             if (isSelected) classes += ' selected';
 
-            html += '<div class="' + classes + '" data-index="' + item.index + '">';
+            html += '<div class="' + classes + '" data-index="' + item.index + '" draggable="true" title="Drag to reorder chain">';
+            html += '  <i class="ph-bold ph-dots-six-vertical drag-handle-icon"></i>';
             html += '  <div class="chain-marker">';
             
             if (isFirst) {
@@ -867,6 +888,47 @@ var BolasGrid = (function() {
     /**
      * تنفيذ Swap - تبديل الأماكن with Undo support
      */
+    
+    /**
+     * Execute swap between two specific layers (for Drag & Drop Reordering - FEAT-01)
+     */
+    function executeSwapBetween(layerAIndex, layerBIndex) {
+        if (!layerAIndex || !layerBIndex || layerAIndex === layerBIndex) return;
+
+        if (typeof StatusBar !== 'undefined') {
+            StatusBar.info('Reordering chain...');
+        }
+
+        var affectedLayers = [layerAIndex, layerBIndex];
+        if (typeof UndoManager !== 'undefined') {
+            UndoManager.beginOperation('swap', 'Reorder Chain (Swap)', affectedLayers);
+        }
+
+        HostService.swapLayers(layerAIndex, layerBIndex).then(function(res) {
+            if (res && res.success) {
+                if (typeof UndoManager !== 'undefined') {
+                    UndoManager.endOperation();
+                }
+                if (typeof StatusBar !== 'undefined') {
+                    StatusBar.success('Chain reordered successfully');
+                }
+                refreshChain();
+            } else {
+                if (typeof UndoManager !== 'undefined') {
+                    UndoManager.cancelOperation();
+                }
+                if (typeof StatusBar !== 'undefined') {
+                    StatusBar.error((res && res.error) ? res.error : 'Reorder failed');
+                }
+            }
+        }).catch(function(e) {
+            if (typeof UndoManager !== 'undefined') {
+                UndoManager.cancelOperation();
+            }
+            console.error('[BolasGrid] Drag swap error:', e);
+        });
+    }
+
     function executeSwap(targetIndex) {
         if (typeof SelectionWatcher === 'undefined' || !SelectionWatcher.hasPinnedLayer()) {
             if (typeof StatusBar !== 'undefined') {

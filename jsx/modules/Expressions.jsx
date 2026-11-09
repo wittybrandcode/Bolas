@@ -10,7 +10,7 @@ var Expressions = {
     position: function(hunterIndex, hunterName, is3D) {
         var esc = Utils.escapeName(hunterName);
         var expr = [
-            '// BolasPro Position v4.0',
+            '// BolasPro Position v5.0 with Spring & Elastic Physics',
             'try {',
             '    var hunter = null;',
             '    try { hunter = thisComp.layer("' + esc + '"); } catch(e) {}',
@@ -38,6 +38,18 @@ var Expressions = {
             '    ];',
             '    ',
             '    var basePos = hunter.toWorld(snagPos, effectiveTime);',
+            '    ',
+            '    // BolasPro v5.0 Spring & Elastic Secondary Motion Physics (FEAT-02)',
+            '    var springFreq = 0;',
+            '    var springDamp = 2;',
+            '    try { springFreq = Math.max(0, effect("' + Config.EFFECTS.SPRING + '")("Slider").value); } catch(e) {}',
+            '    try { springDamp = Math.max(0, effect("' + Config.EFFECTS.DAMPING + '")("Slider").value); } catch(e) {}',
+            '    if (springFreq > 0) {',
+            '        var curTargetPos = hunter.toWorld(snagPos, time);',
+            '        var lagVector = curTargetPos - basePos;',
+            '        var springFactor = Math.sin(springFreq * Math.PI * 2 * effectiveTime) * Math.exp(-springDamp * Math.max(0.01, posDelay));',
+            '        basePos = basePos + lagVector * springFactor;',
+            '    }',
             '    ',
             '    var offX = 0, offY = 0, offZ = 0;',
             '    try { offX = effect("' + Config.EFFECTS.OFFSET_X + '")("Slider").value; } catch(e) {}',

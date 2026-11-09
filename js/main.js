@@ -105,6 +105,19 @@
             SmartChainControls.init();
         }
 
+        // Initialize Internationalization (FEAT-05)
+        if (typeof I18n !== "undefined") {
+            I18n.init();
+        }
+
+        // Bind Settings and Info modals
+        bindHeaderButtons();
+
+        // Initialize Rig Presets & Templates (FEAT-03)
+        if (typeof PresetManager !== "undefined") {
+            PresetManager.init();
+        }
+
         // Bind action buttons
         bindActionButtons();
         
@@ -124,6 +137,97 @@
     /**
      * Bind main action buttons
      */
+    
+    /**
+     * Bind Header Modals (Settings & Info)
+     */
+    function bindHeaderButtons() {
+        var settingsBtn = document.getElementById('settingsBtn');
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', function() {
+                if (typeof Modal === 'undefined') return;
+                var currentLang = (typeof I18n !== 'undefined') ? I18n.getLanguage() : 'en';
+                var html = [
+                    '<div class="settings-modal-content">',
+                    '  <div class="settings-group">',
+                    '    <label class="settings-label"><i class="ph-bold ph-translate"></i> ' + (typeof I18n !== 'undefined' ? I18n.t('settings_lang') : 'Language') + ':</label>',
+                    '    <select id="langSelect" class="modal-select">',
+                    '      <option value="en"' + (currentLang === 'en' ? ' selected' : '') + '>English (Default)</option>',
+                    '      <option value="ar"' + (currentLang === 'ar' ? ' selected' : '') + '>العربية (Arabic - RTL)</option>',
+                    '    </select>',
+                    '  </div>',
+                    '  <div class="settings-group">',
+                    '    <label class="settings-label"><i class="ph-bold ph-waveform"></i> ' + (typeof I18n !== 'undefined' ? I18n.t('settings_spring') : 'Default Spring (Hz)') + ':</label>',
+                    '    <input type="number" id="defaultSpringInput" class="modal-input" min="0" max="10" step="0.5" value="0">',
+                    '  </div>',
+                    '  <div class="settings-group">',
+                    '    <label class="settings-label"><i class="ph-bold ph-sliders"></i> ' + (typeof I18n !== 'undefined' ? I18n.t('settings_damping') : 'Default Damping') + ':</label>',
+                    '    <input type="number" id="defaultDampingInput" class="modal-input" min="0" max="10" step="0.5" value="2.0">',
+                    '  </div>',
+                    '  <div class="settings-actions">',
+                    '    <button class="modal-btn primary" id="saveSettingsBtn">' + (typeof I18n !== 'undefined' ? I18n.t('settings_save') : 'Save') + '</button>',
+                    '  </div>',
+                    '</div>'
+                ].join('');
+
+                Modal.show({
+                    title: typeof I18n !== 'undefined' ? I18n.t('settings_title') : 'Settings',
+                    content: html,
+                    buttons: [{ id: 'close', label: 'Close', primary: false }]
+                });
+
+                setTimeout(function() {
+                    var saveBtn = document.getElementById('saveSettingsBtn');
+                    if (saveBtn) {
+                        saveBtn.addEventListener('click', function() {
+                            var sel = document.getElementById('langSelect');
+                            if (sel && typeof I18n !== 'undefined') {
+                                I18n.setLanguage(sel.value);
+                            }
+                            Modal.hide();
+                            if (typeof StatusBar !== 'undefined') {
+                                StatusBar.success('Settings saved successfully');
+                            }
+                        });
+                    }
+                }, 100);
+            });
+        }
+
+        var infoBtn = document.getElementById('infoBtn');
+        if (infoBtn) {
+            infoBtn.addEventListener('click', function() {
+                if (typeof Modal === 'undefined') return;
+                var html = [
+                    '<div class="about-modal-content" style="text-align:center; padding: 10px;">',
+                    '  <div style="font-size: 32px; color: #ffd700; margin-bottom: 8px;"><i class="ph-bold ph-link-simple"></i></div>',
+                    '  <h2 style="margin: 0 0 6px 0; color: #fff;">BolasPro v5.0.0</h2>',
+                    '  <p style="color: #888; font-size: 11px; margin-bottom: 12px;">Unified Bolas Grid & Follow Rigging Suite</p>',
+                    '  <p style="font-size: 13px; line-height: 1.5; color: #ddd; margin-bottom: 15px;">' + (typeof I18n !== 'undefined' ? I18n.t('about_desc') : '') + '</p>',
+                    '  <div style="text-align: left; background: rgba(0,0,0,0.25); border-radius: 6px; padding: 10px; font-size: 12px; color: #aaa; margin-bottom: 15px;">',
+                    '    <strong>Features:</strong>',
+                    '    <ul style="margin: 5px 0 0 15px; padding: 0;">',
+                    '      <li>3x3 Anchor Snag Alignment & Matrix Transforms</li>',
+                    '      <li>Real-time Drag & Drop Chain Reordering</li>',
+                    '      <li>Damped Harmonic Oscillation (Spring Physics)</li>',
+                    '      <li>Rig Presets (.bolasrig JSON Export/Import)</li>',
+                    '      <li>Non-rendering Viewport Visual Guides</li>',
+                    '      <li>Complete Bilingual English & Arabic Support</li>',
+                    '    </ul>',
+                    '  </div>',
+                    '  <p style="font-size: 11px; color: #666;">Engineered for Adobe After Effects CC 2019 - 2026+</p>',
+                    '</div>'
+                ].join('');
+
+                Modal.show({
+                    title: typeof I18n !== 'undefined' ? I18n.t('about_title') : 'About BolasPro',
+                    content: html,
+                    buttons: [{ id: 'close', label: 'Close', primary: true }]
+                });
+            });
+        }
+    }
+
     function bindActionButtons() {
         // Snag button
         var snagBtn = document.getElementById('snagBtn');

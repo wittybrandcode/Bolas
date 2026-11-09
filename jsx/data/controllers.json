@@ -7,7 +7,10 @@
       "role": "hunter",
       "defaultValue": null,
       "generateValue": true,
-      "range": [-999999, 999999],
+      "range": [
+        -999999,
+        999999
+      ],
       "description": "Unique identifier for Hunter layer"
     },
     "TARGET_ID": {
@@ -15,7 +18,10 @@
       "type": "slider",
       "role": "prey",
       "defaultValue": null,
-      "range": [-999999, 999999],
+      "range": [
+        -999999,
+        999999
+      ],
       "description": "ID of the Hunter to follow"
     },
     "SNAG_POINT": {
@@ -23,7 +29,10 @@
       "type": "slider",
       "role": "prey",
       "defaultValue": 5,
-      "range": [1, 9],
+      "range": [
+        1,
+        9
+      ],
       "description": "Point on Hunter grid (1-9)"
     },
     "PREY_ANCHOR": {
@@ -31,7 +40,10 @@
       "type": "slider",
       "role": "prey",
       "defaultValue": 5,
-      "range": [1, 9],
+      "range": [
+        1,
+        9
+      ],
       "description": "Point on Prey grid (1-9)"
     },
     "LOCK_ORIENTATION": {
@@ -46,7 +58,10 @@
       "type": "slider",
       "role": "prey",
       "defaultValue": 0,
-      "range": [-10000, 10000],
+      "range": [
+        -10000,
+        10000
+      ],
       "description": "Horizontal offset from snag point"
     },
     "OFFSET_Y": {
@@ -54,7 +69,10 @@
       "type": "slider",
       "role": "prey",
       "defaultValue": 0,
-      "range": [-10000, 10000],
+      "range": [
+        -10000,
+        10000
+      ],
       "description": "Vertical offset from snag point"
     },
     "OFFSET_Z": {
@@ -62,7 +80,10 @@
       "type": "slider",
       "role": "prey",
       "defaultValue": 0,
-      "range": [-10000, 10000],
+      "range": [
+        -10000,
+        10000
+      ],
       "condition": "is3D",
       "description": "Depth offset (3D layers only)"
     },
@@ -71,7 +92,10 @@
       "type": "slider",
       "role": "prey",
       "defaultValue": 0,
-      "range": [0, 10],
+      "range": [
+        0,
+        10
+      ],
       "description": "Position follow delay in seconds"
     },
     "ROTATION_DELAY": {
@@ -79,66 +103,135 @@
       "type": "slider",
       "role": "prey",
       "defaultValue": 0,
-      "range": [0, 10],
+      "range": [
+        0,
+        10
+      ],
       "condition": "lockOrientation",
       "description": "Rotation follow delay in seconds"
+    },
+    "SPRING": {
+      "name": "BolasPro - Spring",
+      "type": "slider",
+      "role": "prey",
+      "defaultValue": 0,
+      "range": [
+        0,
+        10
+      ],
+      "description": "Secondary motion spring oscillation frequency (Hz)"
+    },
+    "DAMPING": {
+      "name": "BolasPro - Damping",
+      "type": "slider",
+      "role": "prey",
+      "defaultValue": 2,
+      "range": [
+        0,
+        10
+      ],
+      "description": "Spring oscillation decay damping factor"
     }
   },
   "groups": {
     "identity": {
       "description": "Identity controllers (ID and TARGET_ID)",
-      "controllers": ["ID", "TARGET_ID"]
+      "controllers": [
+        "ID",
+        "TARGET_ID"
+      ]
     },
     "hunter_identity": {
       "description": "Hunter identity only",
-      "controllers": ["ID"]
+      "controllers": [
+        "ID"
+      ]
     },
     "prey_identity": {
       "description": "Prey identity only",
-      "controllers": ["TARGET_ID"]
+      "controllers": [
+        "TARGET_ID"
+      ]
     },
     "anchor_points": {
       "description": "Anchor point controllers",
-      "controllers": ["SNAG_POINT", "PREY_ANCHOR"]
+      "controllers": [
+        "SNAG_POINT",
+        "PREY_ANCHOR"
+      ]
     },
     "offsets": {
       "description": "All offset controllers",
-      "controllers": ["OFFSET_X", "OFFSET_Y", "OFFSET_Z"]
+      "controllers": [
+        "OFFSET_X",
+        "OFFSET_Y",
+        "OFFSET_Z"
+      ]
     },
     "offsets_2d": {
       "description": "2D offset controllers only",
-      "controllers": ["OFFSET_X", "OFFSET_Y"]
+      "controllers": [
+        "OFFSET_X",
+        "OFFSET_Y"
+      ]
     },
     "timing": {
       "description": "Timing/delay controllers",
-      "controllers": ["POSITION_DELAY", "ROTATION_DELAY"]
+      "controllers": [
+        "POSITION_DELAY",
+        "ROTATION_DELAY",
+        "SPRING",
+        "DAMPING"
+      ]
     },
     "orientation": {
       "description": "Orientation lock controller",
-      "controllers": ["LOCK_ORIENTATION"]
+      "controllers": [
+        "LOCK_ORIENTATION"
+      ]
     },
     "prey_controls": {
       "description": "All Prey controls without TARGET_ID",
       "controllers": [
-        "SNAG_POINT", "PREY_ANCHOR", "LOCK_ORIENTATION",
-        "OFFSET_X", "OFFSET_Y", "OFFSET_Z",
-        "POSITION_DELAY", "ROTATION_DELAY"
+        "SNAG_POINT",
+        "PREY_ANCHOR",
+        "LOCK_ORIENTATION",
+        "OFFSET_X",
+        "OFFSET_Y",
+        "OFFSET_Z",
+        "POSITION_DELAY",
+        "ROTATION_DELAY"
       ]
     },
     "prey_full": {
       "description": "All Prey controllers including TARGET_ID",
       "controllers": [
-        "TARGET_ID", "SNAG_POINT", "PREY_ANCHOR", "LOCK_ORIENTATION",
-        "OFFSET_X", "OFFSET_Y", "OFFSET_Z",
-        "POSITION_DELAY", "ROTATION_DELAY"
+        "TARGET_ID",
+        "SNAG_POINT",
+        "PREY_ANCHOR",
+        "LOCK_ORIENTATION",
+        "OFFSET_X",
+        "OFFSET_Y",
+        "OFFSET_Z",
+        "POSITION_DELAY",
+        "ROTATION_DELAY"
       ]
     },
     "all": {
       "description": "All BolasPro controllers",
       "controllers": [
-        "ID", "TARGET_ID", "SNAG_POINT", "PREY_ANCHOR", "LOCK_ORIENTATION",
-        "OFFSET_X", "OFFSET_Y", "OFFSET_Z",
-        "POSITION_DELAY", "ROTATION_DELAY"
+        "ID",
+        "TARGET_ID",
+        "SNAG_POINT",
+        "PREY_ANCHOR",
+        "LOCK_ORIENTATION",
+        "OFFSET_X",
+        "OFFSET_Y",
+        "OFFSET_Z",
+        "POSITION_DELAY",
+        "ROTATION_DELAY",
+        "SPRING",
+        "DAMPING"
       ]
     }
   }

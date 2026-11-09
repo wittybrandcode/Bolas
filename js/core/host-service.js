@@ -251,6 +251,14 @@ var HostService = (function() {
             });
         },
         
+        toggleVisualGuides: function() {
+            return this.evalScript('$._BOLASPRO.toggleVisualGuides()').then(function(result) {
+                return JSON.parse(result);
+            }).catch(function(e) {
+                return { success: false, error: e.message };
+            });
+        },
+        
         selectChain: function(layerIndex) {
             return this.evalScript('$._BOLASPRO.selectChain(' + layerIndex + ')').then(function(result) {
                 return JSON.parse(result);

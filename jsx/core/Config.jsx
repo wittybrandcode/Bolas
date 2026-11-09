@@ -41,7 +41,9 @@ var Config = {
         OFFSET_Y: "BolasPro - Offset Y",
         OFFSET_Z: "BolasPro - Offset Z",
         POSITION_DELAY: "BolasPro - Position Delay",
-        ROTATION_DELAY: "BolasPro - Rotation Delay"
+        ROTATION_DELAY: "BolasPro - Rotation Delay",
+        SPRING: "BolasPro - Spring",
+        DAMPING: "BolasPro - Damping"
     },
     
     /** Cache settings */

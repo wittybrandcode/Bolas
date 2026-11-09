@@ -260,3 +260,33 @@ input:focus-visible {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
+
+/* RTL Support (FEAT-05) */
+body.rtl-mode, [dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+body.rtl-mode .header-left {
+    flex-direction: row;
+}
+
+body.rtl-mode .header-actions {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+body.rtl-mode .chain-item {
+    text-align: right;
+}
+
+body.rtl-mode .drag-handle-icon {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+body.rtl-mode .modal-close {
+    left: 12px;
+    right: auto;
+}

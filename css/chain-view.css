@@ -294,3 +294,46 @@
 .chain-empty span {
     font-size: 10px;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Drag and Drop Chain Reordering (FEAT-01)
+   ───────────────────────────────────────────────────────────── */
+.chain-item[draggable="true"] {
+    cursor: grab;
+    user-select: none;
+}
+
+.chain-item[draggable="true"]:active {
+    cursor: grabbing;
+}
+
+.chain-item.is-dragging {
+    opacity: 0.35;
+    background: rgba(255, 185, 21, 0.08) !important;
+    border: 1px dashed var(--gold) !important;
+}
+
+.chain-item.drag-over {
+    background: rgba(255, 185, 21, 0.18) !important;
+    border-top: 2px solid var(--gold) !important;
+    transform: translateX(4px);
+}
+
+.drag-handle-icon {
+    font-size: 13px;
+    color: var(--text-dim);
+    flex-shrink: 0;
+    opacity: 0.4;
+    transition: opacity var(--transition);
+}
+
+.chain-item:hover .drag-handle-icon {
+    opacity: 1;
+    color: var(--gold);
+}
+
+.chain-tool-btn.active {
+    background: var(--gold-dim) !important;
+    border-color: var(--gold) !important;
+    color: var(--gold) !important;
+}

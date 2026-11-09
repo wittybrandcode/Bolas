@@ -157,6 +157,10 @@ if (typeof $._BOLASPRO === "undefined") {
         return Utils.apiResponse(Chain.createFromSelection, Chain, [options]);
     };
     
+    api.toggleVisualGuides = function() {
+        return Utils.apiResponse(Chain.toggleVisualGuides, Chain);
+    };
+    
     api.selectChain = function(layerIndex) {
         return Utils.apiResponse(Chain.selectAll, Chain, [layerIndex]);
     };

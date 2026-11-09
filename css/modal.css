@@ -242,3 +242,92 @@
 .modal-container.shake {
     animation: shake 0.3s ease;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Presets Modal Styling (FEAT-03)
+   ───────────────────────────────────────────────────────────── */
+.presets-modal-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.presets-modal-intro {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin: 0;
+}
+
+.presets-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-sm);
+}
+
+.preset-card {
+    background: var(--bg-darkest);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: var(--gap-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: all var(--transition);
+}
+
+.preset-card:hover {
+    border-color: var(--gold);
+    background: rgba(255, 185, 21, 0.04);
+}
+
+.preset-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.preset-card-desc {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin: 0 0 6px 0;
+    line-height: 1.4;
+}
+
+.preset-apply-btn {
+    align-self: flex-start;
+    padding: 3px 10px;
+    background: var(--bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.preset-apply-btn:hover {
+    background: var(--gold);
+    color: #111;
+    border-color: var(--gold);
+}
+
+.presets-actions-footer {
+    display: flex;
+    gap: var(--gap-sm);
+    padding-top: var(--gap-sm);
+    border-top: 1px solid var(--border);
+}
+
+.file-input-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0;
+}
