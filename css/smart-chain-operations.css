@@ -1,0 +1,219 @@
+/**
+ * BolasPro v4.0 - Smart Chain Operations Styles
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   Container
+   ═══════════════════════════════════════════════════════════════ */
+
+.smart-chain-operations {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    background: var(--bg-darkest, #1a1a1a);
+    border-radius: var(--radius-md, 6px);
+    margin-top: 12px;
+    border: 1px solid var(--border, #333);
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(-5px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Sections
+   ═══════════════════════════════════════════════════════════════ */
+
+.operations-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.operations-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-dim, #888);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.operations-label i {
+    font-size: 12px;
+}
+
+.unchain-section .operations-label {
+    color: #f97316;
+}
+
+.delete-section .operations-label {
+    color: #ef4444;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Buttons Container
+   ═══════════════════════════════════════════════════════════════ */
+
+.operations-buttons {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Operation Buttons
+   ═══════════════════════════════════════════════════════════════ */
+
+.op-btn {
+    flex: 1;
+    min-width: 60px;
+    height: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    background: var(--bg-light, #2a2a2a);
+    border: 1px solid var(--border, #333);
+    border-radius: var(--radius-sm, 4px);
+    color: var(--text-secondary, #aaa);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+    padding: 4px 8px;
+}
+
+.op-btn i {
+    font-size: 14px;
+}
+
+.op-btn span {
+    font-size: 9px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* Hover States */
+.op-btn:hover:not(:disabled) {
+    background: var(--bg-hover, #333);
+    border-color: var(--border-light, #444);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.unchain-section .op-btn:hover:not(:disabled) {
+    background: rgba(249, 115, 22, 0.15);
+    border-color: #f97316;
+    color: #f97316;
+}
+
+.delete-section .op-btn:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+/* Active/Click State */
+.op-btn:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Disabled State */
+.op-btn:disabled,
+.op-btn.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Warning State (for cascade with followers) */
+.op-btn.warning {
+    border-color: #f59e0b;
+    animation: pulse-warning 2s infinite;
+}
+
+@keyframes pulse-warning {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 4px rgba(245, 158, 11, 0);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Danger Buttons (Delete Section)
+   ═══════════════════════════════════════════════════════════════ */
+
+.op-btn.danger {
+    background: var(--bg-light, #2a2a2a);
+}
+
+.op-btn.danger:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Responsive Adjustments
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 300px) {
+    .operations-buttons {
+        flex-direction: column;
+    }
+    
+    .op-btn {
+        flex: none;
+        width: 100%;
+        flex-direction: row;
+        height: 32px;
+        gap: 8px;
+    }
+    
+    .op-btn span {
+        font-size: 10px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Tooltip Styles (if using custom tooltips)
+   ═══════════════════════════════════════════════════════════════ */
+
+.op-btn[title] {
+    position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Loading State
+   ═══════════════════════════════════════════════════════════════ */
+
+.op-btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.op-btn.loading i {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

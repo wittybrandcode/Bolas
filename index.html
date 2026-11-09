@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BolasPro v5.0</title>
+    
+    <!-- Phosphor Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/bold/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/fill/style.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/bolas-grid.css">
+    <link rel="stylesheet" href="css/chain-view.css">
+    <link rel="stylesheet" href="css/chain-controls.css">
+    <link rel="stylesheet" href="css/smart-chain-operations.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/context-menu.css">
+    <link rel="stylesheet" href="css/selection-indicator.css">
+    <link rel="stylesheet" href="css/undo-controls.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="ph-bold ph-link-simple"></i>
+                </div>
+                <span class="logo-text">BolasPro</span>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" id="settingsBtn" title="Settings">
+                    <i class="ph ph-gear-six"></i>
+                </button>
+                <button class="header-btn" id="infoBtn" title="Info">
+                    <i class="ph ph-info"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Action Bar -->
+        <div class="action-bar">
+            <button class="action-btn primary" id="snagBtn" title="Snag Layers (Ctrl+S)">
+                <i class="ph-bold ph-link"></i>
+                <span>Snag</span>
+            </button>
+            <button class="action-btn" id="freeBtn" title="Free Layers (Ctrl+F)">
+                <i class="ph-bold ph-link-break"></i>
+                <span>Free</span>
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Hunter Bar -->
+            <div class="hunter-bar">
+                <div class="hunter-icon">
+                    <i class="ph-fill ph-crosshair"></i>
+                </div>
+                <select class="hunter-select" id="hunterSelect">
+                    <option value="">Select Hunter...</option>
+                </select>
+                <button class="refresh-btn" id="refreshLayers" title="Refresh Layers">
+                    <i class="ph ph-arrows-clockwise"></i>
+                </button>
+                <div class="order-btns">
+                    <button class="order-btn active" data-order="asc" title="Ascending (صعوداً)">
+                        <i class="ph-bold ph-sort-ascending"></i>
+                    </button>
+                    <button class="order-btn" data-order="desc" title="Descending (نزولاً)">
+                        <i class="ph-bold ph-sort-descending"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bolas Grid - Unified Anchor System -->
+            <section class="section bolas-section" id="bolasSection">
+                <div class="bolas-header">
+                    <div class="bolas-title">
+                        <i class="ph-fill ph-circles-three-plus"></i>
+                        <span>Bolas Grid</span>
+                    </div>
+                    <div class="bolas-tabs" id="bolasTabs">
+                        <button class="bolas-tab active" data-tab="setup" title="Setup (Source + Attach)">
+                            <i class="ph-bold ph-gear"></i>
+                        </button>
+                        <button class="bolas-tab" data-tab="chain" title="Chain View">
+                            <i class="ph-bold ph-link-simple"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Grid Content -->
+                <div class="bolas-content" id="gridContent">
+                    <!-- Setup Mode: Two grids side by side -->
+                    <div class="setup-grids" id="setupGrids">
+                        <div class="setup-grid-item">
+                            <span class="setup-grid-label">SOURCE</span>
+                            <div class="bolas-grid" id="sourceGrid" data-type="source">
+                                <button class="bolas-dot" data-pos="1"><i class="ph-bold ph-arrow-up-left"></i></button>
+                                <button class="bolas-dot" data-pos="2"><i class="ph-bold ph-arrow-up"></i></button>
+                                <button class="bolas-dot" data-pos="3"><i class="ph-bold ph-arrow-up-right"></i></button>
+                                <button class="bolas-dot" data-pos="4"><i class="ph-bold ph-arrow-left"></i></button>
+                                <button class="bolas-dot center active" data-pos="5"><i class="ph-fill ph-circle"></i></button>
+                                <button class="bolas-dot" data-pos="6"><i class="ph-bold ph-arrow-right"></i></button>
+                                <button class="bolas-dot" data-pos="7"><i class="ph-bold ph-arrow-down-left"></i></button>
+                                <button class="bolas-dot" data-pos="8"><i class="ph-bold ph-arrow-down"></i></button>
+                                <button class="bolas-dot" data-pos="9"><i class="ph-bold ph-arrow-down-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="setup-grid-item">
+                            <span class="setup-grid-label">ATTACH</span>
+                            <div class="bolas-grid" id="attachGrid" data-type="attach">
+                                <button class="bolas-dot" data-pos="1"><i class="ph-bold ph-arrow-up-left"></i></button>
+                                <button class="bolas-dot" data-pos="2"><i class="ph-bold ph-arrow-up"></i></button>
+                                <button class="bolas-dot" data-pos="3"><i class="ph-bold ph-arrow-up-right"></i></button>
+                                <button class="bolas-dot" data-pos="4"><i class="ph-bold ph-arrow-left"></i></button>
+                                <button class="bolas-dot center active" data-pos="5"><i class="ph-fill ph-circle"></i></button>
+                                <button class="bolas-dot" data-pos="6"><i class="ph-bold ph-arrow-right"></i></button>
+                                <button class="bolas-dot" data-pos="7"><i class="ph-bold ph-arrow-down-left"></i></button>
+                                <button class="bolas-dot" data-pos="8"><i class="ph-bold ph-arrow-down"></i></button>
+                                <button class="bolas-dot" data-pos="9"><i class="ph-bold ph-arrow-down-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chain Content -->
+                <div class="chain-content" id="chainContent">
+                    <div class="chain-toolbar">
+                        <button class="chain-tool-btn" id="selectAllChain" title="Select All Chain">
+                            <i class="ph ph-selection-all"></i>
+                        </button>
+                        <button class="chain-tool-btn" id="unchainBtn" title="Unchain Selected">
+                            <i class="ph ph-link-break"></i>
+                        </button>
+                        <button class="chain-tool-btn" id="refreshChain" title="Refresh">
+                            <i class="ph ph-arrows-clockwise"></i>
+                        </button>
+                        <button class="chain-tool-btn danger" id="breakAllBtn" title="Break All Chains">
+                            <i class="ph ph-trash"></i>
+                        </button>
+                        <!-- Pin Layer Indicator -->
+                        <div class="selection-indicator" id="selectionIndicator" title="Select a free layer in AE">
+                            <i class="ph-bold ph-push-pin indicator-icon"></i>
+                            <span class="selection-name">Select layer to pin</span>
+                            <button class="clear-btn" title="Clear pinned layer">
+                                <i class="ph-bold ph-x"></i>
+                            </button>
+                            <button class="pin-btn" title="Pin/Unpin layer">
+                                <i class="ph-bold ph-push-pin"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="chain-timeline" id="chainTimeline">
+                        <div class="chain-line"></div>
+                        <!-- Chain items will be rendered here dynamically -->
+                    </div>
+                    <div class="chain-empty" id="chainEmpty">
+                        <i class="ph ph-link-simple-break"></i>
+                        <span>No chain found</span>
+                    </div>
+                    
+                    <!-- Chain Controls Panel -->
+                    <div class="chain-controls-panel" id="chainControlsPanel">
+                        <div class="chain-controls-header">
+                            <div class="chain-controls-title">
+                                <i class="ph-bold ph-sliders"></i>
+                                <span>Layer Controls</span>
+                            </div>
+                            <span class="chain-controls-badge">prey</span>
+                        </div>
+                        <div class="chain-controls-body">
+                            <!-- Controls rendered dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Options Section (visible only in Chain tab) -->
+            <section class="section options-section" id="optionsSection">
+                <div class="options-row">
+                    <div class="toggle-group">
+                        <button class="option-toggle active" id="lockOrientationBtn" title="Lock Orientation">
+                            <i class="ph-bold ph-lock-simple"></i>
+                        </button>
+                        <button class="option-toggle" id="maintainOffsetBtn" title="Maintain Offset">
+                            <i class="ph-bold ph-arrows-out-cardinal"></i>
+                        </button>
+                    </div>
+                    <div class="delay-inputs-group">
+                        <div class="delay-input-item">
+                            <i class="ph ph-clock-countdown" title="Position Delay"></i>
+                            <div class="smart-input">
+                                <button class="smart-btn decrement" data-target="positionDelay">
+                                    <i class="ph-bold ph-minus"></i>
+                                </button>
+                                <input type="number" min="0" max="100" step="0.1" value="0" class="smart-value" id="positionDelayInput">
+                                <button class="smart-btn increment" data-target="positionDelay">
+                                    <i class="ph-bold ph-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="delay-input-item">
+                            <i class="ph ph-arrow-clockwise" title="Rotation Delay"></i>
+                            <div class="smart-input">
+                                <button class="smart-btn decrement" data-target="rotationDelay">
+                                    <i class="ph-bold ph-minus"></i>
+                                </button>
+                                <input type="number" min="0" max="100" step="0.1" value="0" class="smart-value" id="rotationDelayInput">
+                                <button class="smart-btn increment" data-target="rotationDelay">
+                                    <i class="ph-bold ph-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="status-bar" id="statusBar">
+                <div class="status-left">
+                    <!-- Undo/Redo Buttons -->
+                    <div class="undo-controls">
+                        <button class="undo-btn" id="undoBtn" disabled title="Nothing to undo (Ctrl+Z)">
+                            <i class="ph-bold ph-arrow-counter-clockwise"></i>
+                        </button>
+                        <button class="redo-btn" id="redoBtn" disabled title="Nothing to redo (Ctrl+Y)">
+                            <i class="ph-bold ph-arrow-clockwise"></i>
+                        </button>
+                    </div>
+                    <div class="status-indicator" id="statusIndicator"></div>
+                    <span class="status-message" id="statusMessage">Ready</span>
+                </div>
+                <div class="status-right">
+                    <span class="status-version">v5.0</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/lib/CSInterface.js"></script>
+    <script src="js/core/state-manager.js"></script>
+    <script src="js/core/status-bar.js"></script>
+    <script src="js/core/modal.js"></script>
+    <script src="js/core/context-menu.js"></script>
+    <script src="js/core/host-service.js"></script>
+    <script src="js/core/ae-selection-sync.js"></script>
+    <script src="js/core/undo-manager.js"></script>
+    <script src="js/core/selection-watcher.js"></script>
+    <script src="js/controllers/chain-controls.js"></script>
+    <script src="js/controllers/smart-chain-controls.js"></script>
+    <script src="js/controllers/bolas-grid.js"></script>
+    <script src="js/controllers/hunter-bar.js"></script>
+    <script src="js/controllers/options-controller.js"></script>
+    <script src="js/controllers/actions.js"></script>
+    <script src="js/utils/keyboard.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

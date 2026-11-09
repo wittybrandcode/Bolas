@@ -1,0 +1,296 @@
+/* ═══════════════════════════════════════════════════════════════
+   BolasPro v5.0 - Chain View Component
+   Timeline Display inside Bolas Grid
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────
+   Chain Content Container
+   ───────────────────────────────────────────────────────────── */
+.chain-content {
+    padding: var(--gap-sm);
+    display: none;
+}
+
+.chain-content.active {
+    display: block;
+    animation: fadeIn 0.2s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Chain Toolbar
+   ───────────────────────────────────────────────────────────── */
+.chain-toolbar {
+    display: flex;
+    gap: var(--gap-xs);
+    padding: var(--gap-sm);
+    background: var(--bg-darkest);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--gap-sm);
+}
+
+.chain-tool-btn {
+    flex: 1;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 13px;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.chain-tool-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    border-color: var(--border-light);
+}
+
+.chain-tool-btn.danger:hover {
+    background: var(--red-dim);
+    border-color: var(--red);
+    color: var(--red);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Chain Timeline
+   ───────────────────────────────────────────────────────────── */
+.chain-timeline {
+    position: relative;
+    padding-left: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.chain-timeline::-webkit-scrollbar {
+    width: 4px;
+}
+
+.chain-timeline::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chain-timeline::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 2px;
+}
+
+/* Vertical Connecting Line */
+.chain-line {
+    position: absolute;
+    left: 19px;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    background: linear-gradient(
+        180deg,
+        var(--gold) 0%,
+        var(--border) 30%,
+        var(--border) 100%
+    );
+    border-radius: 1px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Chain Item
+   ───────────────────────────────────────────────────────────── */
+.chain-item {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-md);
+    padding: var(--gap-sm) var(--gap-sm);
+    position: relative;
+    cursor: pointer;
+    transition: all var(--transition);
+    border-radius: var(--radius-sm);
+    z-index: 1;
+    pointer-events: auto;
+}
+
+.chain-item * {
+    pointer-events: none;
+}
+
+.chain-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Chain Marker
+   ───────────────────────────────────────────────────────────── */
+.chain-marker {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-light);
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    font-size: 11px;
+    color: var(--text-dim);
+    transition: all 0.2s ease;
+    margin-left: 6px;
+}
+
+.chain-num {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+/* Hunter Marker - Root Hunter (First in chain) */
+.chain-item.root-hunter .chain-marker {
+    background: linear-gradient(135deg, var(--gold) 0%, #d4922a 100%);
+    border-color: var(--gold);
+    box-shadow: var(--shadow-glow-gold), 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.chain-item.root-hunter .chain-marker i {
+    font-size: 14px;
+    color: #1a1a1a;
+}
+
+/* Hunter+Prey Marker (Middle items) */
+.chain-item.hunter-prey .chain-marker {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    border-color: #f97316;
+    box-shadow: 0 0 8px rgba(249, 115, 22, 0.3), 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.chain-item.hunter-prey .chain-marker i {
+    font-size: 12px;
+    color: #1a1a1a;
+}
+
+/* Pure Prey Marker (Last in chain) */
+.chain-item.prey .chain-marker {
+    background: var(--bg-light);
+    border-color: var(--border);
+}
+
+.chain-item.prey .chain-num {
+    color: var(--text-secondary);
+}
+
+/* Selected Marker */
+.chain-item.selected .chain-marker {
+    background: linear-gradient(135deg, var(--green) 0%, #22c55e 100%);
+    border-color: var(--green);
+    box-shadow: var(--shadow-glow-green), 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.chain-item.selected .chain-num,
+.chain-item.selected .chain-marker i {
+    color: #1a1a1a;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Chain Info
+   ───────────────────────────────────────────────────────────── */
+.chain-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+}
+
+.chain-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chain-role {
+    font-size: 9px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Root Hunter Info */
+.chain-item.root-hunter .chain-name {
+    color: var(--gold);
+}
+
+.chain-item.root-hunter .chain-role {
+    color: var(--gold);
+    opacity: 0.7;
+}
+
+/* Hunter+Prey Info (Middle) */
+.chain-item.hunter-prey .chain-name {
+    color: #f97316;
+}
+
+.chain-item.hunter-prey .chain-role {
+    color: #f97316;
+    opacity: 0.7;
+}
+
+/* Pure Prey Info */
+.chain-item.prey .chain-name {
+    color: var(--text-primary);
+}
+
+.chain-item.prey .chain-role {
+    color: var(--text-dim);
+}
+
+/* Selected Info */
+.chain-item.selected .chain-name {
+    color: var(--green);
+}
+
+.chain-item.selected .chain-role {
+    color: var(--green);
+    opacity: 0.8;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Chain Indicator (Pulsing Dot)
+   ───────────────────────────────────────────────────────────── */
+.chain-indicator {
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+    box-shadow: 0 0 8px var(--green);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Chain Empty State
+   ───────────────────────────────────────────────────────────── */
+.chain-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-sm);
+    padding: var(--gap-xl);
+    color: var(--text-dim);
+}
+
+.chain-empty i {
+    font-size: 28px;
+    opacity: 0.4;
+}
+
+.chain-empty span {
+    font-size: 10px;
+}

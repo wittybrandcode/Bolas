@@ -1,0 +1,96 @@
+{
+  "version": "1.0.0",
+  "modes": {
+    "full": {
+      "description": "Remove everything - layer becomes FREE",
+      "bakeExpressions": true,
+      "removeControllers": ["all"],
+      "keepControllers": []
+    },
+    "unlink": {
+      "description": "Remove prey link but keep ID - HUNTER-PREY becomes HUNTER",
+      "bakeExpressions": true,
+      "removeControllers": ["prey_full"],
+      "keepControllers": ["hunter_identity"]
+    },
+    "soft": {
+      "description": "Remove timing only - keep link intact",
+      "bakeExpressions": false,
+      "removeControllers": ["timing"],
+      "keepControllers": ["identity", "anchor_points", "offsets", "orientation"]
+    },
+    "prey_only": {
+      "description": "Remove only prey controls, keep both IDs",
+      "bakeExpressions": true,
+      "removeControllers": ["prey_controls"],
+      "keepControllers": ["identity"]
+    }
+  },
+  "operations": {
+    "snag": {
+      "description": "Basic snag operation - no cleanup needed",
+      "hunterCleanup": null,
+      "preyCleanup": null
+    },
+    "free": {
+      "description": "Free layer completely",
+      "targetCleanup": "full",
+      "followersCleanup": "full"
+    },
+    "insertBefore_hunter": {
+      "description": "Insert before a Hunter (root)",
+      "targetCleanup": "full",
+      "newCleanup": null,
+      "followersCleanup": "unlink"
+    },
+    "insertBefore_prey": {
+      "description": "Insert before a Prey",
+      "targetCleanup": "unlink",
+      "newCleanup": null
+    },
+    "insertAfter": {
+      "description": "Insert after any layer",
+      "targetCleanup": null,
+      "newCleanup": null,
+      "followerCleanup": "unlink"
+    },
+    "swap": {
+      "description": "Swap two layers in chain",
+      "layerACleanup": "unlink",
+      "layerBCleanup": "unlink",
+      "followersCleanup": "unlink"
+    },
+    "cutAfter": {
+      "description": "Cut chain after layer",
+      "targetCleanup": null,
+      "followersCleanup": "full"
+    },
+    "bypass": {
+      "description": "Remove layer from chain, reconnect",
+      "targetCleanup": "full"
+    },
+    "split": {
+      "description": "Split layer as new chain root",
+      "targetCleanup": "unlink"
+    },
+    "deleteReconnect": {
+      "description": "Delete and reconnect followers to leader",
+      "targetCleanup": "full"
+    },
+    "deleteFree": {
+      "description": "Delete and free all followers",
+      "targetCleanup": "full",
+      "followersCleanup": "full"
+    },
+    "deleteCascade": {
+      "description": "Delete layer and all followers",
+      "targetCleanup": "full",
+      "followersCleanup": "full"
+    },
+    "deletePromote": {
+      "description": "Delete and promote first follower",
+      "targetCleanup": "full",
+      "followerCleanup": "unlink"
+    }
+  }
+}

@@ -1,0 +1,262 @@
+/* ═══════════════════════════════════════════════════════════════
+   BolasPro v5.0 - Base Styles
+   Reset, Typography, Layout
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body */
+body {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--text-primary);
+    background: var(--bg-darkest);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    user-select: none;
+    overflow: hidden;
+}
+
+/* App Container */
+.app {
+    width: 100%;
+    min-width: var(--panel-width);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-dark);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Header
+   ───────────────────────────────────────────────────────────── */
+.header {
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--gap-md);
+    background: linear-gradient(180deg, #2d2d2d 0%, #262626 100%);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+}
+
+.logo {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--gold) 0%, #d4922a 100%);
+    border-radius: var(--radius-sm);
+    color: var(--bg-darkest);
+    font-size: 12px;
+}
+
+.logo-text {
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--text-bright);
+    letter-spacing: -0.3px;
+}
+
+.header-actions {
+    display: flex;
+    gap: var(--gap-xs);
+}
+
+.header-btn {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    transition: all var(--transition);
+}
+
+.header-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Main Content
+   ───────────────────────────────────────────────────────────── */
+.main {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: var(--gap-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+}
+
+.main::-webkit-scrollbar {
+    width: 6px;
+}
+
+.main::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.main::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+    background: var(--text-dim);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Footer / Status Bar
+   ───────────────────────────────────────────────────────────── */
+.footer {
+    flex-shrink: 0;
+    border-top: 1px solid var(--border);
+    background: var(--bg-medium);
+}
+
+.status-bar {
+    height: var(--status-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--gap-md);
+    background: var(--bg-darkest);
+    font-size: 9px;
+}
+
+.status-left {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+}
+
+.status-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-dim);
+    transition: all var(--transition);
+}
+
+.status-indicator.online {
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+}
+
+.status-indicator.error {
+    background: var(--red);
+    box-shadow: 0 0 6px var(--red);
+}
+
+.status-indicator.warning {
+    background: var(--orange);
+    box-shadow: 0 0 6px var(--orange);
+}
+
+.status-message {
+    color: var(--text-secondary);
+}
+
+.status-right {
+    color: var(--text-dim);
+}
+
+.status-version {
+    font-family: 'Consolas', monospace;
+    font-size: 9px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Utility Classes
+   ───────────────────────────────────────────────────────────── */
+.hidden {
+    display: none !important;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Focus States */
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 1px;
+}
+
+/* Ripple Effect */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(0);
+    animation: ripple 0.4s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+/* Spin Animation */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

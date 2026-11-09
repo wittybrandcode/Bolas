@@ -1,0 +1,23 @@
+{
+  "id": "prey",
+  "version": "1.0.0",
+  "description": "Full Prey setup with all controllers and expressions",
+  "targetState": "prey",
+  "controllers": [
+    { "id": "TARGET_ID", "required": true },
+    { "id": "SNAG_POINT", "defaultValue": 5 },
+    { "id": "PREY_ANCHOR", "defaultValue": 5 },
+    { "id": "LOCK_ORIENTATION", "defaultValue": false },
+    { "id": "OFFSET_X", "defaultValue": 0 },
+    { "id": "OFFSET_Y", "defaultValue": 0 },
+    { "id": "OFFSET_Z", "defaultValue": 0, "condition": "is3D" },
+    { "id": "POSITION_DELAY", "defaultValue": 0 },
+    { "id": "ROTATION_DELAY", "defaultValue": 0 }
+  ],
+  "expressions": {
+    "position": { "always": true },
+    "anchor": { "always": true },
+    "rotation": { "condition": "lockOrientation" },
+    "orientation": { "condition": "lockOrientation && hunter3D" }
+  }
+}

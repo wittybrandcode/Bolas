@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionManifest Version="7.0" ExtensionBundleId="com.bolaspro.panel" ExtensionBundleVersion="4.0.0" ExtensionBundleName="BolasPro">
+    
+    <ExtensionList>
+        <Extension Id="com.bolaspro.panel.main" Version="4.0.0"/>
+    </ExtensionList>
+    
+    <ExecutionEnvironment>
+        <HostList>
+            <!-- After Effects -->
+            <Host Name="AEFT" Version="[16.0,99.9]"/>
+        </HostList>
+        <LocaleList>
+            <Locale Code="All"/>
+        </LocaleList>
+        <RequiredRuntimeList>
+            <RequiredRuntime Name="CSXS" Version="9.0"/>
+        </RequiredRuntimeList>
+    </ExecutionEnvironment>
+    
+    <DispatchInfoList>
+        <Extension Id="com.bolaspro.panel.main">
+            <DispatchInfo>
+                <Resources>
+                    <MainPath>./index.html</MainPath>
+                    <ScriptPath>./jsx/hostscript.jsx</ScriptPath>
+                    <CEFCommandLine>
+                        <Parameter>--enable-nodejs</Parameter>
+                        <Parameter>--mixed-context</Parameter>
+                    </CEFCommandLine>
+                </Resources>
+                <Lifecycle>
+                    <AutoVisible>true</AutoVisible>
+                </Lifecycle>
+                <UI>
+                    <Type>Panel</Type>
+                    <Menu>BolasPro</Menu>
+                    <Geometry>
+                        <Size>
+                            <Height>700</Height>
+                            <Width>300</Width>
+                        </Size>
+                        <MinSize>
+                            <Height>400</Height>
+                            <Width>280</Width>
+                        </MinSize>
+                        <MaxSize>
+                            <Height>1200</Height>
+                            <Width>400</Width>
+                        </MaxSize>
+                    </Geometry>
+                    <Icons>
+                        <Icon Type="Normal">./assets/icons/icon-light.png</Icon>
+                        <Icon Type="DarkNormal">./assets/icons/icon-dark.png</Icon>
+                    </Icons>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+    </DispatchInfoList>
+    
+</ExtensionManifest>

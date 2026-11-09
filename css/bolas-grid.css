@@ -1,0 +1,257 @@
+/* ═══════════════════════════════════════════════════════════════
+   BolasPro v5.0 - Bolas Grid Component
+   Unified Anchor System with 6 Tabs
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────
+   Bolas Section Container
+   ───────────────────────────────────────────────────────────── */
+.bolas-section {
+    background: var(--bg-medium);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color var(--transition);
+}
+
+.bolas-section:hover {
+    border-color: var(--border-light);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Bolas Header
+   ───────────────────────────────────────────────────────────── */
+.bolas-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--gap-sm) var(--gap-md);
+    background: var(--bg-light);
+    border-bottom: 1px solid var(--border);
+}
+
+.bolas-title {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bolas-title i {
+    color: var(--gold);
+    font-size: 13px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Bolas Tabs
+   ───────────────────────────────────────────────────────────── */
+.bolas-tabs {
+    display: flex;
+    gap: 2px;
+    background: var(--bg-darkest);
+    border-radius: var(--radius-md);
+    padding: 3px;
+}
+
+.bolas-tab {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 13px;
+    transition: all var(--transition);
+}
+
+.bolas-tab:hover {
+    background: var(--bg-hover);
+    color: var(--text-secondary);
+}
+
+.bolas-tab.active {
+    background: var(--gold);
+    color: #1a1a1a;
+}
+
+/* Tab-specific active colors */
+.bolas-tab[data-tab="setup"].active {
+    background: var(--tab-setup);
+}
+
+.bolas-tab[data-tab="anchor"].active {
+    background: var(--tab-anchor);
+}
+
+.bolas-tab[data-tab="chain"].active {
+    background: var(--tab-chain);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Bolas Content (Grid View)
+   ───────────────────────────────────────────────────────────── */
+.bolas-content {
+    padding: var(--gap-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-md);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Bolas Grid (3x3)
+   ───────────────────────────────────────────────────────────── */
+.bolas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    width: 100%;
+    max-width: 200px;
+}
+
+.bolas-dot {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all var(--transition);
+    min-height: 52px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bolas-dot:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--text-bright);
+    transform: scale(1.03);
+}
+
+.bolas-dot:active {
+    transform: scale(0.97);
+}
+
+.bolas-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--text-bright);
+    box-shadow: var(--shadow-glow-accent);
+}
+
+.bolas-dot.center {
+    background: var(--bg-hover);
+}
+
+.bolas-dot.center i {
+    font-size: 12px;
+}
+
+/* Tab-specific active colors for grid */
+[data-current-tab="setup"] #sourceGrid .bolas-dot.active {
+    background: #0d99ff;
+    border-color: #0d99ff;
+}
+
+[data-current-tab="setup"] #attachGrid .bolas-dot.active {
+    background: var(--tab-setup);
+    border-color: var(--tab-setup);
+}
+
+[data-current-tab="anchor"] .bolas-dot.active {
+    background: var(--tab-anchor);
+    border-color: var(--tab-anchor);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Setup Mode - Two Grids Side by Side
+   ───────────────────────────────────────────────────────────── */
+.setup-grids {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    width: 100%;
+}
+
+.setup-grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    max-width: 140px;
+}
+
+.setup-grid-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.setup-grids .bolas-grid {
+    max-width: 100%;
+    gap: 4px;
+}
+
+.setup-grids .bolas-dot {
+    min-height: 36px;
+    font-size: 14px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Anchor Mode - Single Grid with Indicator
+   ───────────────────────────────────────────────────────────── */
+.anchor-grid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-md);
+    width: 100%;
+}
+
+.anchor-grid-container .bolas-grid {
+    max-width: 180px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Bolas Indicator
+   ───────────────────────────────────────────────────────────── */
+.bolas-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-md);
+    padding: var(--gap-sm) var(--gap-md);
+    background: var(--bg-darkest);
+    border-radius: var(--radius-md);
+    width: 100%;
+    max-width: 200px;
+}
+
+.indicator-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.indicator-pos {
+    font-size: 10px;
+    color: var(--text-secondary);
+    margin-left: auto;
+}

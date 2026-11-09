@@ -1,0 +1,10 @@
+{
+  "id": "hunter",
+  "version": "1.0.0",
+  "description": "Hunter preset - adds ID only",
+  "targetState": "hunter",
+  "controllers": [
+    { "id": "ID", "required": true, "generateValue": true }
+  ],
+  "expressions": null
+}

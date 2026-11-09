@@ -1,0 +1,319 @@
+/* ═══════════════════════════════════════════════════════════════
+   BolasPro v5.0 - Chain Controls Panel
+   Dynamic controls for selected chain layer
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────
+   Controls Panel Container
+   ───────────────────────────────────────────────────────────── */
+.chain-controls-panel {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background: var(--bg-darkest);
+    border-radius: var(--radius-md);
+    margin-top: var(--gap-sm);
+    border: 1px solid var(--border);
+    animation: slideDown 0.2s ease;
+}
+
+.chain-controls-panel.active {
+    display: flex;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Controls Header
+   ───────────────────────────────────────────────────────────── */
+.chain-controls-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.chain-controls-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chain-controls-title i {
+    font-size: 14px;
+    color: var(--green);
+}
+
+.chain-controls-badge {
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-light);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.chain-controls-badge.prey {
+    background: rgba(249, 115, 22, 0.15);
+    color: #f97316;
+}
+
+.chain-controls-badge.hunter {
+    background: rgba(234, 179, 8, 0.15);
+    color: var(--gold);
+}
+
+.chain-controls-badge.hunter-prey {
+    background: rgba(234, 179, 8, 0.12);
+    color: var(--gold);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Controls Body
+   ───────────────────────────────────────────────────────────── */
+.chain-controls-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Mini Grids Row (Snag Point + Prey Anchor)
+   ───────────────────────────────────────────────────────────── */
+.control-grids-row {
+    display: flex;
+    gap: 16px;
+    justify-content: space-evenly;
+    padding: 8px 0;
+}
+
+.control-grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-grid-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* Mini 3x3 Grid - Fixed Size */
+.control-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 36px);
+    grid-template-rows: repeat(3, 36px);
+    gap: 4px;
+    background: var(--bg-darkest);
+    padding: 6px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+}
+
+.control-mini-dot {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: var(--text-dim);
+}
+
+.control-mini-dot:hover {
+    background: var(--bg-hover);
+    border-color: var(--border-light);
+    color: var(--text-primary);
+}
+
+.control-mini-dot.active {
+    background: var(--green);
+    border-color: var(--green);
+    color: #1a1a1a;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+.control-mini-dot i {
+    font-size: 16px;
+}
+
+/* Snag Point specific - Orange */
+.control-grid-item.snag-point .control-mini-dot.active {
+    background: #f97316;
+    border-color: #f97316;
+    color: #1a1a1a;
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+}
+
+/* Prey Anchor specific - Cyan */
+.control-grid-item.prey-anchor .control-mini-dot.active {
+    background: #06b6d4;
+    border-color: #06b6d4;
+    color: #1a1a1a;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Hunter Info (when hunter selected)
+   ───────────────────────────────────────────────────────────── */
+.hunter-info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    background: rgba(234, 179, 8, 0.08);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+.hunter-info-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+}
+
+.hunter-info-row i {
+    color: var(--gold);
+    font-size: 14px;
+}
+
+.hunter-info-label {
+    color: var(--text-dim);
+}
+
+.hunter-info-value {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Leader Info (for prey layers)
+   ───────────────────────────────────────────────────────────── */
+.leader-info-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: var(--bg-light);
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+}
+
+.leader-info-row i {
+    color: var(--gold);
+    font-size: 12px;
+}
+
+.leader-info-row span {
+    color: var(--text-secondary);
+}
+
+.leader-info-row strong {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Empty State
+   ───────────────────────────────────────────────────────────── */
+.chain-controls-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    color: var(--text-dim);
+    font-size: 11px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Quick Anchor Section (for Root Hunter)
+   ───────────────────────────────────────────────────────────── */
+.quick-anchor-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+}
+
+.quick-anchor-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.quick-anchor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 42px);
+    grid-template-rows: repeat(3, 42px);
+    gap: 4px;
+    background: var(--bg-darkest);
+    padding: 8px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+}
+
+.quick-anchor-dot {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: var(--text-dim);
+}
+
+.quick-anchor-dot:hover {
+    background: var(--bg-hover);
+    border-color: var(--border-light);
+    color: var(--text-primary);
+}
+
+.quick-anchor-dot.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #1a1a1a;
+    box-shadow: 0 0 10px rgba(232, 166, 52, 0.5);
+}
+
+.quick-anchor-dot.center {
+    background: var(--bg-hover);
+}
+
+.quick-anchor-dot i {
+    font-size: 16px;
+}
