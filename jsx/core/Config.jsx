@@ -1,11 +1,11 @@
 /**
- * BolasPro v4.0 - Configuration Module
+ * BolasPro v5.0 - Configuration Module
  * Central configuration object containing all constants
  */
 
 var Config = {
     NAME: "BolasPro",
-    VERSION: "4.0",
+    VERSION: "5.0.0",
     
     /** Anchor point ratios [x, y] for positions 1-9 */
     ANCHORS: {

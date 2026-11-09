@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ExtensionManifest Version="7.0" ExtensionBundleId="com.bolaspro.panel" ExtensionBundleVersion="4.0.0" ExtensionBundleName="BolasPro">
+<ExtensionManifest Version="7.0" ExtensionBundleId="com.bolaspro.panel" ExtensionBundleVersion="5.0.0" ExtensionBundleName="BolasPro">
     
     <ExtensionList>
-        <Extension Id="com.bolaspro.panel.main" Version="4.0.0"/>
+        <Extension Id="com.bolaspro.panel.main" Version="5.0.0"/>
     </ExtensionList>
     
     <ExecutionEnvironment>

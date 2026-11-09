@@ -1,5 +1,5 @@
 /**
- * BolasPro v5.0 - Bolas Grid Controller
+ * BolasPro v5.0.0 - Bolas Grid Controller
  * 2 Tabs: Setup (Source+Attach), Chain
  * 
  * Integrated with AESelectionSync for automatic chain updates
@@ -922,13 +922,26 @@ var BolasGrid = (function() {
     }
 
     // ═══════════════════════════════════════════════════════════════
+    // Grid Position Selection API (FIX-04)
+    // ═══════════════════════════════════════════════════════════════
+
+    function selectPosition(pos, type) {
+        type = type || 'source';
+        var gridElement = type === 'source' ? elements.sourceGrid : elements.attachGrid;
+        if (gridElement) {
+            selectSetupPosition(type, pos, gridElement);
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════════════
     // Public API
     // ═══════════════════════════════════════════════════════════════
 
     return {
         init: init,
         switchTab: switchTab,
-        refreshChain: refreshChain
+        refreshChain: refreshChain,
+        selectPosition: selectPosition
     };
 
 })();

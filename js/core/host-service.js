@@ -1,5 +1,5 @@
 /**
- * BolasPro v4.0 - Host Service
+ * BolasPro v5.0.0 - Host Service
  * Bridge between panel and After Effects via CSInterface
  */
 
@@ -16,9 +16,14 @@ var HostService = (function() {
             this.loadAllJSX();
         },
         
+        isJSXLoaded: function() {
+            return jsxLoaded;
+        },
+        
         loadAllJSX: function() {
             var extensionPath = csInterface.getSystemPath('extension').replace(/\\/g, '/');
             var jsxPath = extensionPath + '/jsx';
+            var dataPath = jsxPath + '/data/';
             
             var modules = [
                 // Core modules (order matters!)
@@ -29,7 +34,7 @@ var HostService = (function() {
                 'core/Matrix.jsx',
                 // Effects
                 'effects/EffectsManager.jsx',
-                // Controller Manager System (new)
+                // Controller Manager System
                 'core/DataLoader.jsx',
                 'core/SensorSystem.jsx',
                 'core/ExpressionEngine.jsx',
@@ -57,13 +62,17 @@ var HostService = (function() {
             for (var i = 0; i < modules.length; i++) {
                 loadScript += '$.evalFile("' + jsxPath + '/' + modules[i] + '");';
             }
+            // Explicitly ensure DataLoader initializes with correct absolute data path
+            loadScript += 'if (typeof DataLoader !== "undefined") { DataLoader.init("' + dataPath + '"); }';
             
             csInterface.evalScript(loadScript, function(result) {
                 if (result !== 'EvalScript error.') {
                     jsxLoaded = true;
-                    console.log('[HostService] All JSX modules loaded');
+                    console.log('[HostService] All JSX modules loaded successfully');
+                    document.dispatchEvent(new CustomEvent('bolas:jsx-ready', { detail: { path: jsxPath } }));
                 } else {
                     console.error('[HostService] Failed to load JSX modules');
+                    document.dispatchEvent(new CustomEvent('bolas:jsx-error'));
                 }
             });
         },

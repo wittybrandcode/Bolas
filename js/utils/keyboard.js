@@ -1,5 +1,5 @@
 /**
- * BolasPro v5.0 - Keyboard Handler
+ * BolasPro v5.0.0 - Keyboard Handler
  * Keyboard shortcuts for quick actions
  */
 
@@ -23,41 +23,44 @@ var KeyboardHandler = (function() {
     // ═══════════════════════════════════════════════════════════════
 
     function handleKeyDown(e) {
-        // Ignore if typing in input
+        // Ignore if typing in input, select or textarea
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
             return;
         }
 
         // Ctrl/Cmd shortcuts
-        if (e.ctrlKey || e.metaKey) {
-            switch (e.key.toLowerCase()) {
-                case 's':
-                    e.preventDefault();
-                    triggerSnag();
-                    break;
-                case 'f':
-                    e.preventDefault();
-                    triggerFree();
-                    break;
-                case 'r':
-                    e.preventDefault();
-                    triggerRefresh();
-                    break;
+        // IMPORTANT (FIX-03): Do NOT hijack native Ctrl+S (AE project save)!
+        // Use Ctrl+Shift+S or Alt+S for Snag
+        if ((e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 's') || (e.altKey && e.key.toLowerCase() === 's')) {
+            e.preventDefault();
+            triggerSnag();
+            return;
+        }
+
+        // Ctrl+F or Alt+F for Free
+        if ((e.ctrlKey && e.key.toLowerCase() === 'f') || (e.altKey && e.key.toLowerCase() === 'f')) {
+            e.preventDefault();
+            triggerFree();
+            return;
+        }
+
+        // Ctrl+R or Alt+R for Refresh
+        if ((e.ctrlKey && e.key.toLowerCase() === 'r') || (e.altKey && e.key.toLowerCase() === 'r')) {
+            e.preventDefault();
+            triggerRefresh();
+            return;
+        }
+
+        // Tab switching (FIX-04): 1 for Setup, 2 for Chain View
+        if ((e.key === '1' || e.key === '2') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            var targetTab = e.key === '1' ? 'setup' : 'chain';
+            if (typeof BolasGrid !== 'undefined' && BolasGrid.switchTab) {
+                BolasGrid.switchTab(targetTab);
             }
             return;
         }
 
-        // Number keys 1-6 for tabs
-        if (e.key >= '1' && e.key <= '6' && !e.ctrlKey && !e.metaKey && !e.altKey) {
-            var tabs = ['source', 'attach', 'quick', 'snag', 'prey', 'chain'];
-            var idx = parseInt(e.key) - 1;
-            if (tabs[idx] && typeof BolasGrid !== 'undefined') {
-                BolasGrid.switchTab(tabs[idx]);
-            }
-            return;
-        }
-
-        // Numpad for grid positions
+        // Numpad for 3x3 grid positions (FIX-04)
         var numpadMap = {
             'Numpad7': 1, 'Numpad8': 2, 'Numpad9': 3,
             'Numpad4': 4, 'Numpad5': 5, 'Numpad6': 6,
@@ -66,7 +69,8 @@ var KeyboardHandler = (function() {
 
         if (numpadMap[e.code]) {
             var pos = numpadMap[e.code];
-            if (typeof BolasGrid !== 'undefined') {
+            if (typeof BolasGrid !== 'undefined' && BolasGrid.selectPosition) {
+                e.preventDefault();
                 BolasGrid.selectPosition(pos);
             }
             return;

@@ -1,9 +1,19 @@
 /**
- * BolasPro v4.0 - DataLoader Module
+ * BolasPro v5.0 - DataLoader Module
  * Loads and manages JSON configuration files
  * 
  * Dependencies: JSONPolyfill.jsx
  */
+
+// Capture script file location at evaluation time
+var _dataLoaderScriptFile = (function() {
+    try {
+        if (typeof $.fileName !== 'undefined' && $.fileName) {
+            return new File($.fileName);
+        }
+    } catch(e) {}
+    return null;
+})();
 
 var DataLoader = {
     // ═══════════════════════════════════════════════════════════════
@@ -22,15 +32,40 @@ var DataLoader = {
     // ═══════════════════════════════════════════════════════════════
     
     /**
+     * Set explicit base path for data folder
+     * @param {string} path - Absolute path to data directory
+     */
+    setBasePath: function(path) {
+        if (path) {
+            this._basePath = path.replace(/\\/g, '/');
+            if (this._basePath.charAt(this._basePath.length - 1) !== '/') {
+                this._basePath += '/';
+            }
+            this.reload();
+        }
+    },
+    
+    /**
      * Initialize DataLoader - loads all JSON config files
+     * @param {string} [customPath] - Optional custom path to data folder
      * @returns {boolean} Success status
      */
-    init: function() {
+    init: function(customPath) {
+        if (customPath) {
+            this._basePath = customPath.replace(/\\/g, '/');
+            if (this._basePath.charAt(this._basePath.length - 1) !== '/') {
+                this._basePath += '/';
+            }
+            this._initialized = false;
+        }
+        
         if (this._initialized) return true;
         
         try {
-            // Determine base path from script location
-            this._basePath = this._getBasePath();
+            // Determine base path from script location if not set
+            if (!this._basePath) {
+                this._basePath = this._getBasePath();
+            }
             
             // Load core configuration files
             this._cache.controllers = this._loadJSON('controllers.json');
@@ -43,13 +78,13 @@ var DataLoader = {
             
             // Validate loaded data
             if (!this._cache.controllers || !this._cache.controllers.controllers) {
-                $.writeln("[DataLoader] ERROR: Failed to load controllers.json");
+                $.writeln("[DataLoader] ERROR: Failed to load controllers.json from " + this._basePath);
                 return false;
             }
             
             this._initialized = true;
             $.writeln("[DataLoader] Initialized - " + 
-                Object.keys(this._cache.controllers.controllers).length + " controllers loaded");
+                Object.keys(this._cache.controllers.controllers).length + " controllers loaded from " + this._basePath);
             
             return true;
         } catch(e) {
@@ -152,24 +187,43 @@ var DataLoader = {
      */
     _getBasePath: function() {
         try {
-            var scriptFile = new File($.fileName);
-            var scriptFolder = scriptFile.parent;
+            var candidateFolders = [];
             
-            // Navigate from jsx/core/ to jsx/data/
-            var dataFolder = new Folder(scriptFolder.fsName + '/../data/');
-            
-            if (dataFolder.exists) {
-                return dataFolder.fsName + '/';
+            // 1. From captured evaluation-time script location (DataLoader.jsx is in jsx/core/)
+            if (_dataLoaderScriptFile && _dataLoaderScriptFile.exists) {
+                var coreFolder = _dataLoaderScriptFile.parent;
+                candidateFolders.push(new Folder(coreFolder.fsName + '/../data/'));
+                candidateFolders.push(new Folder(coreFolder.fsName + '/data/'));
             }
             
-            // Fallback: try relative to jsx folder
-            dataFolder = new Folder(scriptFolder.parent.fsName + '/data/');
-            if (dataFolder.exists) {
-                return dataFolder.fsName + '/';
+            // 2. From runtime $.fileName (could be hostscript.jsx in jsx/, or tests/ in tests/)
+            if (typeof $.fileName !== 'undefined' && $.fileName) {
+                var currentFile = new File($.fileName);
+                if (currentFile.exists) {
+                    var curFolder = currentFile.parent;
+                    candidateFolders.push(new Folder(curFolder.fsName + '/data/'));
+                    candidateFolders.push(new Folder(curFolder.fsName + '/../data/'));
+                    candidateFolders.push(new Folder(curFolder.fsName + '/../jsx/data/'));
+                    candidateFolders.push(new Folder(curFolder.fsName + '/jsx/data/'));
+                }
             }
             
-            $.writeln("[DataLoader] Warning: data folder not found, using default path");
-            return scriptFolder.fsName + '/../data/';
+            // Check candidates
+            for (var i = 0; i < candidateFolders.length; i++) {
+                var f = candidateFolders[i];
+                if (f && f.exists) {
+                    var path = f.fsName.replace(/\\/g, '/');
+                    if (path.charAt(path.length - 1) !== '/') path += '/';
+                    // Verify controllers.json exists in this folder
+                    var testFile = new File(path + 'controllers.json');
+                    if (testFile.exists) {
+                        return path;
+                    }
+                }
+            }
+            
+            $.writeln("[DataLoader] Warning: data folder not found in candidates, using fallback");
+            return (_dataLoaderScriptFile ? _dataLoaderScriptFile.parent.fsName.replace(/\\/g, '/') : '') + '/../data/';
         } catch(e) {
             $.writeln("[DataLoader] Path error: " + e);
             return '';
@@ -202,7 +256,7 @@ var DataLoader = {
             return JSON.parse(content);
         } catch(e) {
             $.writeln("[DataLoader] Error loading " + filename + ": " + e);
-            if (file.open) file.close();
+            try { file.close(); } catch(err) {}
             return null;
         }
     },

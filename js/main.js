@@ -434,21 +434,28 @@
     document.addEventListener('DOMContentLoaded', init);
 
     // Auto-refresh layers on load - wait for JSX to load
+    function handleJSXReady() {
+        console.log('[BolasPro] JSX Ready event received - auto-refreshing layers...');
+        if (typeof HunterBar !== 'undefined') {
+            HunterBar.refreshLayers();
+        }
+        if (typeof BolasGrid !== 'undefined') {
+            BolasGrid.refreshChain();
+        }
+    }
+
+    document.addEventListener('bolas:jsx-ready', handleJSXReady);
+
+    // Fallback if event already fired before listener attached
     window.addEventListener('load', function() {
-        console.log('[BolasPro] Window loaded, waiting for JSX...');
-        setTimeout(function() {
-            console.log('[BolasPro] Auto-refreshing layers...');
-            if (typeof HunterBar !== 'undefined') {
-                HunterBar.refreshLayers();
-            } else {
-                console.error('[BolasPro] HunterBar not available');
-            }
-        }, 2000); // Wait 2 seconds for JSX to load
+        if (typeof HostService !== 'undefined' && HostService.isJSXLoaded && HostService.isJSXLoaded()) {
+            handleJSXReady();
+        }
     });
 
     // Expose for debugging
     window.BolasPro = {
-        version: '5.0',
+        version: '5.0.0',
         StateManager: StateManager,
         UndoManager: typeof UndoManager !== 'undefined' ? UndoManager : null,
         BolasGrid: typeof BolasGrid !== 'undefined' ? BolasGrid : null,

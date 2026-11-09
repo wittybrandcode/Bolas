@@ -1,5 +1,5 @@
 /**
- * BolasPro v4.0 - Host Script API
+ * BolasPro v5.0.0 - Host Script API
  * Thin API layer for CEP communication
  * 
  * All modules are loaded by HostService.js BEFORE this file:
