@@ -77,9 +77,13 @@ var DataLoader = {
             this._cache.presets.hunterPrey = this._loadJSON('presets/hunter-prey.json');
             
             // Validate loaded data
+            // Validate loaded data with embedded fallback
             if (!this._cache.controllers || !this._cache.controllers.controllers) {
-                $.writeln("[DataLoader] ERROR: Failed to load controllers.json from " + this._basePath);
-                return false;
+                $.writeln("[DataLoader] Applying embedded fallback controllers...");
+                var fallback = this._getEmbeddedFallback();
+                this._cache.controllers = { controllers: fallback.controllers };
+                this._cache.presets.hunter = fallback.presets.hunter;
+                this._cache.presets.prey = fallback.presets.prey;
             }
             
             this._initialized = true;
@@ -265,6 +269,55 @@ var DataLoader = {
      * Check if DataLoader is initialized
      * @returns {boolean}
      */
+    
+    /** Embedded fallback in case external JSON files are inaccessible */
+    _getEmbeddedFallback: function() {
+        return {
+            controllers: {
+                "ID": { "name": "BolasPro ID", "type": "slider", "role": "hunter", "defaultValue": null, "generateValue": true, "range": [-999999, 999999] },
+                "TARGET_ID": { "name": "BolasPro Target ID", "type": "slider", "role": "prey", "defaultValue": null, "range": [-999999, 999999] },
+                "SNAG_POINT": { "name": "BolasPro - Snag Point", "type": "slider", "role": "prey", "defaultValue": 5, "range": [1, 9] },
+                "PREY_ANCHOR": { "name": "BolasPro - Prey Anchor", "type": "slider", "role": "prey", "defaultValue": 5, "range": [1, 9] },
+                "LOCK_ORIENTATION": { "name": "BolasPro - Lock Orientation", "type": "checkbox", "role": "prey", "defaultValue": false },
+                "OFFSET_X": { "name": "BolasPro - Offset X", "type": "slider", "role": "prey", "defaultValue": 0, "range": [-10000, 10000] },
+                "OFFSET_Y": { "name": "BolasPro - Offset Y", "type": "slider", "role": "prey", "defaultValue": 0, "range": [-10000, 10000] },
+                "OFFSET_Z": { "name": "BolasPro - Offset Z", "type": "slider", "role": "prey", "defaultValue": 0, "condition": "is3D", "range": [-10000, 10000] },
+                "POSITION_DELAY": { "name": "BolasPro - Position Delay", "type": "slider", "role": "prey", "defaultValue": 0, "range": [0, 10] },
+                "ROTATION_DELAY": { "name": "BolasPro - Rotation Delay", "type": "slider", "role": "prey", "defaultValue": 0, "condition": "lockOrientation", "range": [0, 10] },
+                "SPRING": { "name": "BolasPro - Spring", "type": "slider", "role": "prey", "defaultValue": 0, "range": [0, 10] },
+                "DAMPING": { "name": "BolasPro - Damping", "type": "slider", "role": "prey", "defaultValue": 2, "range": [0, 10] }
+            },
+            presets: {
+                hunter: {
+                    id: "hunter",
+                    controllers: [{ id: "ID", required: true, generateValue: true }]
+                },
+                prey: {
+                    id: "prey",
+                    controllers: [
+                        { id: "TARGET_ID", required: true },
+                        { id: "SNAG_POINT", defaultValue: 5 },
+                        { id: "PREY_ANCHOR", defaultValue: 5 },
+                        { id: "LOCK_ORIENTATION", defaultValue: false },
+                        { id: "OFFSET_X", defaultValue: 0 },
+                        { id: "OFFSET_Y", defaultValue: 0 },
+                        { id: "OFFSET_Z", defaultValue: 0, condition: "is3D" },
+                        { id: "POSITION_DELAY", defaultValue: 0 },
+                        { id: "ROTATION_DELAY", defaultValue: 0 },
+                        { id: "SPRING", defaultValue: 0 },
+                        { id: "DAMPING", defaultValue: 2 }
+                    ],
+                    expressions: {
+                        position: { always: true },
+                        anchor: { always: true },
+                        rotation: { condition: "lockOrientation" },
+                        orientation: { condition: "lockOrientation && hunter3D" }
+                    }
+                }
+            }
+        };
+    },
+
     isInitialized: function() {
         return this._initialized;
     },

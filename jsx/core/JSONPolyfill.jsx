@@ -1,6 +1,6 @@
 /**
  * BolasPro v5.0 - Polyfills for ExtendScript ES3 Environment
- * Provides JSON, Object.keys, Date.now, and Array methods for Adobe ExtendScript
+ * Provides bulletproof JSON, Object.keys, Date.now, and Array methods for Adobe ExtendScript
  */
 
 // 1. JSON Polyfill
@@ -8,19 +8,15 @@ if (typeof JSON === 'undefined') {
     JSON = {};
 }
 
-if (typeof JSON.parse !== 'function') {
-    JSON.parse = function(text) {
-        var sanitized = String(text)
-            .replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
-            .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
-            .replace(/(?:^|:|,)(?:\s*\[)+/g, '');
-        
-        if (/^[],:{}\s]*$/.test(sanitized)) {
-            return eval('(' + text + ')');
-        }
-        throw new SyntaxError('JSON.parse: Invalid JSON string');
-    };
-}
+// Bulletproof JSON.parse for ExtendScript
+JSON.parse = function(text) {
+    if (text === null || text === undefined || text === '') return null;
+    try {
+        return eval('(' + text + ')');
+    } catch(e) {
+        throw new SyntaxError('JSON.parse error: ' + (e ? (e.message || String(e)) : ''));
+    }
+};
 
 if (typeof JSON.stringify !== 'function') {
     JSON.stringify = function(obj) {
@@ -159,4 +155,4 @@ if (!String.prototype.trim) {
     };
 }
 
-$.writeln("[BolasPro] ES3 Polyfills initialized (JSON, Object.keys, Date.now, Array methods)");
+$.writeln("[BolasPro] ES3 Polyfills initialized (Direct JSON.parse, Object.keys, Date.now, Array methods)");

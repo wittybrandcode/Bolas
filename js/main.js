@@ -376,6 +376,7 @@
             // Build chain options
             var chainOptions = {
                 hunterIndex: hunterIndex,
+                layerIndices: layerIndices,
                 order: options.sortOrder || 'asc',
                 snagPoint: options.sourceAnchor || 5,
                 preyAnchor: options.attachAnchor || 5,

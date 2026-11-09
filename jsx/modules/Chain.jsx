@@ -28,20 +28,26 @@ var Chain = {
         if (!Utils.isComp(comp)) {
             return { success: false, error: "No composition selected" };
         }
-        if (comp.selectedLayers.length < 2) {
-            return { success: false, error: "Select at least 2 layers" };
-        }
+        // Layers check handled below with options.layerIndices support
         
-        // Build layer indices array
+        // Build layer indices array from options or active selection
         var hunterIdx = parseInt(options.hunterIndex, 10) || 0;
         var selectedIndices = [];
         
+        if (options && options.layerIndices && options.layerIndices.length >= 2) {
+            for (var idx = 0; idx < options.layerIndices.length; idx++) {
+                selectedIndices.push(parseInt(options.layerIndices[idx], 10));
+            }
+        } else if (comp.selectedLayers && comp.selectedLayers.length >= 2) {
+            for (var i = 0; i < comp.selectedLayers.length; i++) {
+                selectedIndices.push(comp.selectedLayers[i].index);
+            }
+        } else {
+            return { success: false, error: "Select at least 2 layers in AE" };
+        }
+        
         $.writeln("[Chain] hunterIndex from options: " + options.hunterIndex + " -> parsed: " + hunterIdx);
         $.writeln("[Chain] order from options: " + options.order);
-        
-        for (var i = 0; i < comp.selectedLayers.length; i++) {
-            selectedIndices.push(comp.selectedLayers[i].index);
-        }
         
         $.writeln("[Chain] Selected indices (raw): " + selectedIndices.join(", "));
         

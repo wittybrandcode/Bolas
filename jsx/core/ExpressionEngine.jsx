@@ -97,12 +97,33 @@ var ExpressionEngine = {
      * @private
      */
     _applyToProperty: function(layer, propName, expression) {
-        var t = layer.property(Config.AE.TRANSFORM);
-        var prop = t.property(propName);
+        if (!layer) throw new Error('No layer provided');
+        var t = layer.property(Config.AE.TRANSFORM) || layer.transform;
+        if (!t) throw new Error('Transform group not found on ' + layer.name);
+        
+        var prop = null;
+        try { prop = t.property(propName); } catch(e) {}
+        
+        // Fallback names for multilingual AE versions
+        if (!prop) {
+            if (propName === Config.AE.POSITION) prop = t.property("Position") || t.position;
+            else if (propName === Config.AE.ANCHOR) prop = t.property("Anchor Point") || t.anchorPoint;
+            else if (propName === Config.AE.ROTATION || propName === "ADBE Rotate Z") prop = t.property("Rotation") || t.property("ADBE Rotation") || t.rotation;
+            else if (propName === Config.AE.ROTATION_X) prop = t.property("X Rotation") || t.xRotation;
+            else if (propName === Config.AE.ROTATION_Y) prop = t.property("Y Rotation") || t.yRotation;
+            else if (propName === Config.AE.ORIENTATION) prop = t.property("Orientation") || t.orientation;
+        }
         
         if (!prop) {
             throw new Error('Property not found: ' + propName);
         }
+        
+        // Disable separate dimensions if enabled so compound position expression works
+        try {
+            if (prop.dimensionsSeparated) {
+                prop.dimensionsSeparated = false;
+            }
+        } catch(dimErr) {}
         
         prop.expression = expression;
     },
