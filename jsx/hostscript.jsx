@@ -586,11 +586,11 @@ if (typeof $._BOLASPRO === "undefined") {
 try {
     DataLoader.init();
 } catch(e) {
-    $.writeln("[BolasPro] DataLoader init error: " + e);
+    $.writeln("[BolasPro] DataLoader init error: " + (e ? (e.message || String(e)) : "unknown"));
 }
 
 // ═══════════════════════════════════════════════════════════════════════
 // INITIALIZATION LOG
 // ═══════════════════════════════════════════════════════════════════════
 $.writeln("[BolasPro] API v" + Config.VERSION + " ready - " + 
-    Object.keys($._BOLASPRO).length + " endpoints");
+    (function(obj){ var c=0; for(var k in obj){ if(Object.prototype.hasOwnProperty.call(obj, k)) c++; } return c; })($._BOLASPRO) + " endpoints");

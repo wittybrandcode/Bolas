@@ -335,36 +335,56 @@
     function executeSnag() {
         console.log('[BolasPro] Executing Snag...');
 
-        // Get hunter
-        var hunterIndex = StateManager.get('hunterIndex') || 0;
-        var layers = StateManager.get('layers') || [];
-
-        if (layers.length < 2) {
-            if (typeof StatusBar !== 'undefined') {
-                StatusBar.warning('Select 2+ layers first');
-            }
-            return;
+        if (typeof StatusBar !== 'undefined') {
+            StatusBar.info('Checking selected layers in AE...');
         }
 
-        // Get layer indices for undo
-        var layerIndices = layers.map(function(l) { return l.index; });
+        // Direct query to HostService to get real-time active selection from AE
+        HostService.getSelectedLayers().then(function(result) {
+            var layers = (result && result.success && result.layers) ? result.layers : [];
 
-        // Get options from StateManager
-        var options = StateManager.getSnagOptions();
-        
-        // Build chain options
-        var chainOptions = {
-            hunterIndex: hunterIndex,
-            order: options.sortOrder || 'asc',
-            snagPoint: options.sourceAnchor || 5,
-            preyAnchor: options.attachAnchor || 5,
-            lockOrientation: options.lockOrientation || false,
-            maintainOffset: options.maintainOffset || false
-        };
+            // Check if user has a pinned layer in SelectionWatcher
+            var pinned = (typeof SelectionWatcher !== 'undefined') ? SelectionWatcher.getPinnedLayer() : null;
 
-        console.log('[BolasPro] Chain options:', JSON.stringify(chainOptions));
+            // If 1 layer selected in AE and we have a different pinned layer, pair them!
+            if (layers.length === 1 && pinned && pinned.index !== layers[0].index) {
+                console.log('[BolasPro] Pairing pinned layer (' + pinned.name + ') as Hunter with selected layer (' + layers[0].name + ') as Prey');
+                layers = [pinned, layers[0]];
+            }
 
-        if (typeof HostService !== 'undefined') {
+            if (layers.length < 2) {
+                if (typeof StatusBar !== 'undefined') {
+                    StatusBar.warning('Select 2+ layers in AE (or Pin 1 layer + Select another)');
+                }
+                return;
+            }
+
+            // Sync with StateManager
+            StateManager.set('layers', layers);
+
+            var hunterIndex = StateManager.get('hunterIndex');
+            if (!hunterIndex && layers.length > 0) {
+                hunterIndex = layers[0].index;
+            }
+
+            // Get layer indices for undo
+            var layerIndices = layers.map(function(l) { return l.index; });
+
+            // Get options from StateManager
+            var options = StateManager.getSnagOptions();
+            
+            // Build chain options
+            var chainOptions = {
+                hunterIndex: hunterIndex,
+                order: options.sortOrder || 'asc',
+                snagPoint: options.sourceAnchor || 5,
+                preyAnchor: options.attachAnchor || 5,
+                lockOrientation: options.lockOrientation || false,
+                maintainOffset: options.maintainOffset || false
+            };
+
+            console.log('[BolasPro] Chain options:', JSON.stringify(chainOptions));
+
             if (typeof StatusBar !== 'undefined') {
                 StatusBar.info('Snagging layers...');
             }
@@ -374,48 +394,44 @@
                 UndoManager.beginOperation('chain', 'Create Chain (' + layers.length + ')', layerIndices);
             }
 
-            HostService.createChainFromSelected(chainOptions).then(function(result) {
-                console.log('[BolasPro] Snag result:', result);
-                if (result && result.success) {
-                    // End undo recording (success)
+            HostService.createChainFromSelected(chainOptions).then(function(res) {
+                console.log('[BolasPro] Snag result:', res);
+                if (res && res.success) {
                     if (typeof UndoManager !== 'undefined') {
                         UndoManager.endOperation();
                     }
-                    
                     if (typeof StatusBar !== 'undefined') {
-                        StatusBar.success('Snag complete! ' + (result.chainLength || '') + ' layers');
+                        StatusBar.success(res.message || 'Chain created successfully');
                     }
-                    // Refresh chain view
                     if (typeof BolasGrid !== 'undefined') {
                         BolasGrid.refreshChain();
                     }
-                    // Refresh layers list
-                    if (typeof HunterBar !== 'undefined') {
-                        HunterBar.refreshLayers();
-                    }
                 } else {
-                    // Cancel undo recording (failure)
                     if (typeof UndoManager !== 'undefined') {
                         UndoManager.cancelOperation();
                     }
-                    
                     if (typeof StatusBar !== 'undefined') {
-                        StatusBar.error(result.error || 'Snag failed');
+                        StatusBar.error((res && res.error) ? res.error : 'Failed to create chain');
                     }
                 }
-            }).catch(function(error) {
-                // Cancel undo recording (error)
+            }).catch(function(err) {
                 if (typeof UndoManager !== 'undefined') {
                     UndoManager.cancelOperation();
                 }
-                
-                console.error('[BolasPro] Snag error:', error);
+                console.error('[BolasPro] Snag error:', err);
                 if (typeof StatusBar !== 'undefined') {
-                    StatusBar.error('Snag failed: ' + error.message);
+                    StatusBar.error('Snag error: ' + (err.message || err));
                 }
             });
-        }
+        }).catch(function(err) {
+            console.error('[BolasPro] Error querying layers:', err);
+            if (typeof StatusBar !== 'undefined') {
+                StatusBar.error('Failed to communicate with After Effects');
+            }
+        });
     }
+
+
 
     /**
      * Execute Free operation

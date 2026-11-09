@@ -79,19 +79,34 @@ var Detector = {
      */
     getSelectedLayers: function() {
         var comp = app.project.activeItem;
-        if (!Utils.isComp(comp)) return { error: "No composition selected" };
+        if (!Utils.isComp(comp)) {
+            return { success: false, error: "No composition selected", layers: [], count: 0 };
+        }
         
         var layers = [];
-        for (var i = 0; i < comp.selectedLayers.length; i++) {
-            var layer = comp.selectedLayers[i];
-            var state = this.getState(layer);
-            layers.push({
-                index: layer.index,
-                name: layer.name,
-                isHunter: state.isHunter,
-                isPrey: state.isPrey,
-                is3D: layer.threeDLayer
-            });
+        try {
+            var sel = comp.selectedLayers;
+            if (sel) {
+                for (var i = 0; i < sel.length; i++) {
+                    try {
+                        var layer = sel[i];
+                        if (layer) {
+                            var state = this.getState(layer);
+                            layers.push({
+                                index: layer.index,
+                                name: layer.name,
+                                isHunter: state ? !!state.isHunter : false,
+                                isPrey: state ? !!state.isPrey : false,
+                                is3D: !!layer.threeDLayer
+                            });
+                        }
+                    } catch(err) {
+                        $.writeln("[Detector] Warning on layer: " + (err ? (err.message || String(err)) : ""));
+                    }
+                }
+            }
+        } catch(e) {
+            return { success: false, error: (e ? (e.message || String(e)) : "Error"), layers: [], count: 0 };
         }
         
         return { 

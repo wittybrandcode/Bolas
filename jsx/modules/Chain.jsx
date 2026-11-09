@@ -669,7 +669,7 @@ var Chain = {
         if (state.isHunter && state.isPrey) return 'hunter-prey';
         if (state.isPrey) return 'prey';
         return 'free';
-    }
+    },
     /**
      * Toggle visual connection guides in active composition (FEAT-04)
      */

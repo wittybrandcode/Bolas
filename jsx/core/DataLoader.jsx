@@ -84,11 +84,11 @@ var DataLoader = {
             
             this._initialized = true;
             $.writeln("[DataLoader] Initialized - " + 
-                Object.keys(this._cache.controllers.controllers).length + " controllers loaded from " + this._basePath);
+                (function(obj){ var c=0; for(var k in obj){ if(Object.prototype.hasOwnProperty.call(obj, k)) c++; } return c; })(this._cache.controllers.controllers) + " controllers loaded from " + this._basePath);
             
             return true;
         } catch(e) {
-            $.writeln("[DataLoader] Init error: " + e);
+            $.writeln("[DataLoader] Init error: " + (e ? (e.message || String(e)) : "unknown"));
             return false;
         }
     },
