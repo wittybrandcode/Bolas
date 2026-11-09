@@ -28,30 +28,57 @@ var KeyboardHandler = (function() {
             return;
         }
 
-        // Ctrl/Cmd shortcuts
-        // IMPORTANT (FIX-03): Do NOT hijack native Ctrl+S (AE project save)!
-        // Use Ctrl+Shift+S or Alt+S for Snag
+        // =====================================================================
+        // Undo / Redo Shortcuts (REF-01: Centralized in keyboard.js)
+        // =====================================================================
+        
+        // Undo: Ctrl+Z (or Cmd+Z) without Shift
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && !e.shiftKey) {
+            e.preventDefault();
+            if (typeof UndoManager !== 'undefined') {
+                UndoManager.undo();
+            }
+            return;
+        }
+
+        // Redo: Ctrl+Y or Ctrl+Shift+Z (or Cmd+Shift+Z)
+        if (((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') || 
+            ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && e.shiftKey)) {
+            e.preventDefault();
+            if (typeof UndoManager !== 'undefined') {
+                UndoManager.redo();
+            }
+            return;
+        }
+
+        // =====================================================================
+        // Action Shortcuts
+        // =====================================================================
+
+        // Snag: Alt+S or Ctrl+Shift+S (FIX-03: Safe shortcut, leaves Ctrl+S for AE native save)
         if ((e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 's') || (e.altKey && e.key.toLowerCase() === 's')) {
             e.preventDefault();
             triggerSnag();
             return;
         }
 
-        // Ctrl+F or Alt+F for Free
+        // Free: Ctrl+F or Alt+F
         if ((e.ctrlKey && e.key.toLowerCase() === 'f') || (e.altKey && e.key.toLowerCase() === 'f')) {
             e.preventDefault();
             triggerFree();
             return;
         }
 
-        // Ctrl+R or Alt+R for Refresh
+        // Refresh: Ctrl+R or Alt+R
         if ((e.ctrlKey && e.key.toLowerCase() === 'r') || (e.altKey && e.key.toLowerCase() === 'r')) {
             e.preventDefault();
             triggerRefresh();
             return;
         }
 
-        // Tab switching (FIX-04): 1 for Setup, 2 for Chain View
+        // =====================================================================
+        // Tab Navigation: 1 for Setup, 2 for Chain View (FIX-04)
+        // =====================================================================
         if ((e.key === '1' || e.key === '2') && !e.ctrlKey && !e.metaKey && !e.altKey) {
             var targetTab = e.key === '1' ? 'setup' : 'chain';
             if (typeof BolasGrid !== 'undefined' && BolasGrid.switchTab) {
@@ -60,7 +87,9 @@ var KeyboardHandler = (function() {
             return;
         }
 
-        // Numpad for 3x3 grid positions (FIX-04)
+        // =====================================================================
+        // Numpad 1-9 for 3x3 Grid Position Selection (FIX-04)
+        // =====================================================================
         var numpadMap = {
             'Numpad7': 1, 'Numpad8': 2, 'Numpad9': 3,
             'Numpad4': 4, 'Numpad5': 5, 'Numpad6': 6,

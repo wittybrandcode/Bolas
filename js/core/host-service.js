@@ -58,21 +58,71 @@ var HostService = (function() {
                 'hostscript.jsx'
             ];
             
-            var loadScript = '';
-            for (var i = 0; i < modules.length; i++) {
-                loadScript += '$.evalFile("' + jsxPath + '/' + modules[i] + '");';
-            }
-            // Explicitly ensure DataLoader initializes with correct absolute data path
-            loadScript += 'if (typeof DataLoader !== "undefined") { DataLoader.init("' + dataPath + '"); }';
+            // Sequential JSX Evaluator with granular per-file line & error reporting (REF-02)
+            var scriptLines = [
+                '(function() {',
+                '    var errors = [];',
+                '    var loaded = [];',
+                '    var modules = ' + JSON.stringify(modules) + ';',
+                '    for (var i = 0; i < modules.length; i++) {',
+                '        var fPath = "' + jsxPath + '/" + modules[i];',
+                '        try {',
+                '            var f = new File(fPath);',
+                '            if (!f.exists) {',
+                '                errors.push({ module: modules[i], error: "File not found", line: 0 });',
+                '            } else {',
+                '                $.evalFile(fPath);',
+                '                loaded.push(modules[i]);',
+                '            }',
+                '        } catch(e) {',
+                '            errors.push({ module: modules[i], error: e.toString(), line: e.line || 0 });',
+                '        }',
+                '    }',
+                '    if (typeof DataLoader !== "undefined") {',
+                '        try {',
+                '            DataLoader.init("' + dataPath + '");',
+                '        } catch(e) {',
+                '            errors.push({ module: "DataLoader.init", error: e.toString(), line: e.line || 0 });',
+                '        }',
+                '    }',
+                '    return JSON.stringify({',
+                '        success: errors.length === 0,',
+                '        total: modules.length,',
+                '        loadedCount: loaded.length,',
+                '        loaded: loaded,',
+                '        errors: errors',
+                '    });',
+                '})()'
+            ];
+            
+            var loadScript = scriptLines.join('\n');
             
             csInterface.evalScript(loadScript, function(result) {
-                if (result !== 'EvalScript error.') {
+                var response = null;
+                try {
+                    response = JSON.parse(result);
+                } catch(e) {}
+                
+                if (response && response.success) {
                     jsxLoaded = true;
-                    console.log('[HostService] All JSX modules loaded successfully');
-                    document.dispatchEvent(new CustomEvent('bolas:jsx-ready', { detail: { path: jsxPath } }));
+                    console.log('[HostService] ✓ All ' + response.loadedCount + ' JSX modules loaded sequentially without errors');
+                    document.dispatchEvent(new CustomEvent('bolas:jsx-ready', { 
+                        detail: { path: jsxPath, modules: response.loaded } 
+                    }));
+                } else if (response && response.errors && response.errors.length > 0) {
+                    console.error('[HostService] ❌ Errors encountered while loading JSX modules:');
+                    for (var k = 0; k < response.errors.length; k++) {
+                        var err = response.errors[k];
+                        console.error('   ↳ [' + err.module + '] Line ' + err.line + ': ' + err.error);
+                    }
+                    document.dispatchEvent(new CustomEvent('bolas:jsx-error', { 
+                        detail: { errors: response.errors, loaded: response.loaded } 
+                    }));
                 } else {
-                    console.error('[HostService] Failed to load JSX modules');
-                    document.dispatchEvent(new CustomEvent('bolas:jsx-error'));
+                    console.error('[HostService] Failed to load JSX modules: ' + result);
+                    document.dispatchEvent(new CustomEvent('bolas:jsx-error', { 
+                        detail: { raw: result } 
+                    }));
                 }
             });
         },

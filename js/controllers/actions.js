@@ -1,6 +1,6 @@
 /**
  * BolasPro v5.0 - Actions Controller (Legacy Compatibility)
- * This file is kept for backward compatibility but main actions are in main-v2.js
+ * This file is kept for backward compatibility but main actions are in main.js
  */
 
 var Actions = (function() {

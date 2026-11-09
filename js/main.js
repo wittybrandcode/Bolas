@@ -183,30 +183,7 @@
                 refreshAfterUndoRedo();
             });
         }
-        
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Only handle when panel is focused (not in input fields)
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-                return;
-            }
-            
-            // Ctrl+Z for Undo
-            if (e.ctrlKey && e.key === 'z' && !e.shiftKey) {
-                e.preventDefault();
-                if (typeof UndoManager !== 'undefined') {
-                    UndoManager.undo();
-                }
-            }
-            
-            // Ctrl+Y or Ctrl+Shift+Z for Redo
-            if (e.ctrlKey && (e.key === 'y' || (e.key === 'z' && e.shiftKey))) {
-                e.preventDefault();
-                if (typeof UndoManager !== 'undefined') {
-                    UndoManager.redo();
-                }
-            }
-        });
+        // Note: Keyboard shortcuts (Ctrl+Z / Ctrl+Y) are centralized in keyboard.js (REF-01)
     }
     
     /**

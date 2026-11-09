@@ -121,9 +121,12 @@ var SmartChainControls = (function() {
     }
 
     function bindButton(id, handler) {
-        var btn = document.getElementById(id);
+        // Query within container element first, fallback to document (REF-03)
+        var btn = (elements.container && elements.container.querySelector) 
+            ? elements.container.querySelector('#' + id) 
+            : document.getElementById(id);
+            
         if (btn) {
-            // Remove old listener first to avoid duplicates
             btn.removeEventListener('click', handler);
             btn.addEventListener('click', handler);
         } else {
