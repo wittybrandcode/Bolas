@@ -48,18 +48,18 @@ var SmartChainControls = (function() {
         var unchainSection = document.createElement('div');
         unchainSection.className = 'operations-section unchain-section';
         unchainSection.innerHTML = [
-            '<span class="operations-label"><i class="ph-bold ph-scissors"></i> UNCHAIN</span>',
+            '<span class="operations-label"><i class="ph-fill ph-scissors"></i> UNCHAIN</span>',
             '<div class="operations-buttons">',
             '  <button class="op-btn" id="cutAfterBtn" title="Cut After - قطع ما بعد" disabled>',
-            '    <i class="ph-bold ph-scissors"></i>',
+            '    <i class="ph-fill ph-scissors"></i>',
             '    <span>Cut</span>',
             '  </button>',
             '  <button class="op-btn" id="bypassBtn" title="Bypass - تجاوز" disabled>',
-            '    <i class="ph-bold ph-arrows-split"></i>',
+            '    <i class="ph-fill ph-arrows-split"></i>',
             '    <span>Bypass</span>',
             '  </button>',
             '  <button class="op-btn" id="splitBtn" title="Split - تقسيم" disabled>',
-            '    <i class="ph-bold ph-git-branch"></i>',
+            '    <i class="ph-fill ph-git-branch"></i>',
             '    <span>Split</span>',
             '  </button>',
             '</div>'
@@ -69,22 +69,22 @@ var SmartChainControls = (function() {
         var deleteSection = document.createElement('div');
         deleteSection.className = 'operations-section delete-section';
         deleteSection.innerHTML = [
-            '<span class="operations-label"><i class="ph-bold ph-trash"></i> DELETE</span>',
+            '<span class="operations-label"><i class="ph-fill ph-trash"></i> DELETE</span>',
             '<div class="operations-buttons">',
             '  <button class="op-btn danger" id="deleteReconnectBtn" title="Delete + Reconnect - حذف وإعادة ربط" disabled>',
-            '    <i class="ph-bold ph-link"></i>',
+            '    <i class="ph-fill ph-link"></i>',
             '    <span>Reconnect</span>',
             '  </button>',
             '  <button class="op-btn danger" id="deleteFreeBtn" title="Delete + Free - حذف وتحرير" disabled>',
-            '    <i class="ph-bold ph-link-break"></i>',
+            '    <i class="ph-fill ph-link-break"></i>',
             '    <span>Free</span>',
             '  </button>',
             '  <button class="op-btn danger" id="deleteCascadeBtn" title="Delete Cascade - حذف متسلسل ⚠️" disabled>',
-            '    <i class="ph-bold ph-trash"></i>',
+            '    <i class="ph-fill ph-trash"></i>',
             '    <span>Cascade</span>',
             '  </button>',
             '  <button class="op-btn danger" id="deletePromoteBtn" title="Delete + Promote - حذف وترقية" disabled>',
-            '    <i class="ph-bold ph-crown"></i>',
+            '    <i class="ph-fill ph-crown"></i>',
             '    <span>Promote</span>',
             '  </button>',
             '</div>'

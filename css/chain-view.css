@@ -1,70 +1,73 @@
-/* ═══════════════════════════════════════════════════════════════
+/* ==========================================================================
    BolasPro v5.0 - SGD Pro Chain View
    Color-Coded Banks, Technical Timeline Cards, Zero-Radius
-   ═══════════════════════════════════════════════════════════════ */
+   Solid Fills & Proportional Broadcast Hierarchy
+   ========================================================================== */
 
 .chain-content {
     display: none;
-    padding: 6px;
+    padding: 8px;
+    width: 100%;
 }
 
 .chain-content.active {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Color-Coded Chain Toolbars
-   ───────────────────────────────────────────────────────────── */
+/* ==========================================================================
+   Color-Coded Chain Toolbars (Solid Full Fills)
+   ========================================================================== */
 .chain-toolbar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 4px;
-    padding: 4px;
-    background: var(--sgd-bg-void);
+    gap: 5px;
+    padding: 5px;
+    background: #141820;
     border: 1px solid var(--sgd-border-default);
+    width: 100%;
 }
 
-/* Tools Bank: Cyan */
+/* Tools Bank: Solid Cyan */
 .chain-tools-bank-cyan {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
     padding: 2px;
     background: var(--cyan-bank-bg);
     border: 1px solid var(--cyan-bank-border);
     border-top: 2px solid var(--sgd-cat-tools-cyan);
 }
 
-/* Show/Hide Bank: Radiant Green */
+/* Show/Hide Bank: Solid Radiant Green */
 .chain-tools-bank-green {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
     padding: 2px;
     background: var(--green-bank-bg);
     border: 1px solid var(--green-bank-border);
     border-top: 2px solid var(--sgd-brand-green);
 }
 
-/* Presets Bank: Amber */
+/* Presets Bank: Solid Amber */
 .chain-tools-bank-amber {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
     padding: 2px;
     background: var(--amber-bank-bg);
     border: 1px solid var(--amber-bank-border);
     border-top: 2px solid var(--sgd-cat-zoom-amber);
 }
 
-/* Danger Bank: Crimson */
+/* Danger Bank: Solid Crimson */
 .chain-tools-bank-crimson {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
     padding: 2px;
     background: var(--crimson-bank-bg);
     border: 1px solid var(--crimson-bank-border);
@@ -72,105 +75,114 @@
 }
 
 .chain-tool-btn {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--slate-btn-bg);
+    background: #202633;
     border: 1px solid var(--sgd-border-subtle);
-    color: var(--sgd-text-secondary);
+    color: #CBD5E1;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
     transition: all var(--transition);
+    outline: none;
 }
 
 .chain-tool-btn:hover {
-    background: var(--slate-btn-hover);
+    background: #2D3646;
     color: #FFFFFF;
 }
 
 .chain-tool-btn.cyan-btn {
-    background: var(--cyan-btn-bg);
-    border-color: var(--cyan-bank-border);
-    color: var(--cyan-btn-text);
+    background: var(--cyan-solid-bg) !important;
+    border: 1px solid var(--cyan-solid-border) !important;
+    color: #FFFFFF !important;
 }
 .chain-tool-btn.cyan-btn:hover {
-    background: var(--cyan-btn-hover);
-    color: #FFFFFF;
+    background: var(--cyan-solid-hover) !important;
+    box-shadow: 0 0 8px rgba(14, 165, 233, 0.4);
 }
 
 .chain-tool-btn.green-btn {
-    background: var(--green-btn-bg);
-    border-color: var(--green-bank-border);
-    color: var(--green-btn-text);
+    background: #16A34A !important;
+    border: 1px solid #4ADE80 !important;
+    color: #FFFFFF !important;
 }
 .chain-tool-btn.green-btn:hover {
-    background: var(--green-btn-hover);
-    color: #FFFFFF;
+    background: #22C55E !important;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
 }
 .chain-tool-btn.green-btn.active {
-    background: var(--sgd-brand-green);
-    color: var(--sgd-brand-dark);
+    background: var(--sgd-brand-green) !important;
+    color: #0E1706 !important;
 }
 
 .chain-tool-btn.amber-btn {
-    background: var(--amber-btn-bg);
-    border-color: var(--amber-bank-border);
-    color: var(--amber-btn-text);
+    background: var(--amber-solid-bg) !important;
+    border: 1px solid var(--amber-solid-border) !important;
+    color: #FFFFFF !important;
 }
 .chain-tool-btn.amber-btn:hover {
-    background: var(--amber-btn-hover);
-    color: #FFFFFF;
+    background: var(--amber-solid-hover) !important;
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
 }
 
 .chain-tool-btn.crimson-btn {
-    background: var(--crimson-btn-bg);
-    border-color: var(--crimson-bank-border);
-    color: var(--crimson-btn-text);
+    background: var(--crimson-solid-bg) !important;
+    border: 1px solid var(--crimson-solid-border) !important;
+    color: #FFFFFF !important;
 }
 .chain-tool-btn.crimson-btn:hover {
-    background: var(--crimson-btn-hover);
-    color: #FFFFFF;
+    background: var(--crimson-solid-hover) !important;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
 }
 
-/* ─────────────────────────────────────────────────────────────
+/* ==========================================================================
    Chain Timeline Items
-   ───────────────────────────────────────────────────────────── */
+   ========================================================================== */
 .chain-timeline {
     display: flex;
     flex-direction: column;
     gap: 3px;
-    max-height: 220px;
+    max-height: 240px;
     overflow-y: auto;
     padding-right: 2px;
+    width: 100%;
 }
 
 .chain-item {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 5px 8px;
-    background: #1C2028;
-    border: 1px solid var(--sgd-border-default);
+    gap: 7px;
+    padding: 6px 10px;
+    background: #1C2330;
+    border: 1px solid #2B3648;
     border-left: 3px solid var(--sgd-border-strong);
     cursor: grab;
     transition: all var(--transition);
 }
 
 .chain-item:hover {
-    background: #242A35;
-    border-color: var(--sgd-cat-tools-cyan);
+    background: #252F40;
+    border-color: #38BDF8;
+}
+
+.chain-item.selected {
+    background: #233144;
+    border-color: #38BDF8;
+    border-left: 3px solid #38BDF8;
+    box-shadow: inset 0 0 8px rgba(56, 189, 248, 0.15);
 }
 
 .chain-item.hunter {
     border-left-color: var(--sgd-brand-green);
-    background: #182016;
+    background: #182417;
 }
 
 .chain-item.prey {
     border-left-color: var(--sgd-cat-tools-cyan);
-    background: #151F2A;
+    background: #162433;
 }
 
 .chain-item.dragging {
@@ -185,7 +197,7 @@
 
 .drag-handle-icon {
     color: var(--sgd-text-muted);
-    font-size: 13px;
+    font-size: 14px;
     cursor: grab;
 }
 
@@ -196,7 +208,7 @@
 }
 
 .marker-badge {
-    padding: 1px 4px;
+    padding: 2px 5px;
     font-family: var(--font-mono);
     font-size: 9px;
     font-weight: 700;

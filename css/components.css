@@ -1,79 +1,84 @@
-/* ═══════════════════════════════════════════════════════════════
+/* ==========================================================================
    BolasPro v5.0 - SGD Pro Components
-   Tactical Buttons, Color-Coded Action Bars, Sharp Inputs
-   ═══════════════════════════════════════════════════════════════ */
+   Tactical Buttons, Solid Coded Action Bars, Generous Proportions
+   No Hollow Outlines, Pure Solid Fills
+   ========================================================================== */
 
-/* ─────────────────────────────────────────────────────────────
-   Color-Coded Action Bars (Cyan Snag & Crimson Free)
-   ───────────────────────────────────────────────────────────── */
+/* ==========================================================================
+   Color-Coded Action Bars (Solid Cyan Snag & Solid Crimson Free)
+   ========================================================================== */
 .action-bar {
     display: flex;
-    gap: 4px;
+    gap: 6px;
     padding: 0;
     background: transparent;
+    width: 100%;
 }
 
-/* Snag Button: Cyan Bank CTA */
+/* Snag Button: Solid Cyan Full Fill CTA */
 .action-btn {
     flex: 1;
-    height: 32px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
     cursor: pointer;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     transition: all var(--transition);
-    border: 1px solid var(--sgd-border-default);
-    background: var(--slate-btn-bg);
-    color: var(--sgd-text-primary);
+    border: 1px solid #2F394A;
+    background: #202633;
+    color: #E2E8F0;
+    outline: none;
 }
 
-.action-btn.primary {
-    background: var(--cyan-btn-bg);
-    border: 1px solid var(--cyan-bank-border);
-    border-top: 2px solid var(--sgd-cat-tools-cyan);
-    color: var(--cyan-btn-text);
+.action-btn i {
+    font-size: 16px;
 }
 
-.action-btn.primary:hover {
-    background: var(--cyan-btn-hover);
-    color: #FFFFFF;
-    border-color: var(--sgd-cat-tools-cyan);
-    box-shadow: 0 0 8px rgba(56, 189, 248, 0.25);
+.action-btn.primary, #snagBtn {
+    background: var(--cyan-solid-bg) !important;
+    border: 1px solid var(--cyan-solid-border) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
 }
 
-.action-btn.primary:active {
-    background: var(--sgd-cat-tools-cyan);
-    color: #09131C;
+.action-btn.primary:hover, #snagBtn:hover {
+    background: var(--cyan-solid-hover) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
 }
 
-/* Free Button: Crimson Bank Action */
+.action-btn.primary:active, #snagBtn:active {
+    background: var(--cyan-solid-active) !important;
+    transform: translateY(1px);
+}
+
+/* Free Button: Solid Crimson Full Fill Action */
 .action-btn.danger-action, #freeBtn {
-    background: var(--crimson-btn-bg);
-    border: 1px solid var(--crimson-bank-border);
-    border-top: 2px solid var(--sgd-cat-live-crimson);
-    color: var(--crimson-btn-text);
+    background: var(--crimson-solid-bg) !important;
+    border: 1px solid var(--crimson-solid-border) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.35);
 }
 
 .action-btn.danger-action:hover, #freeBtn:hover {
-    background: var(--crimson-btn-hover);
-    color: #FFFFFF;
-    border-color: var(--sgd-cat-live-crimson);
-    box-shadow: 0 0 8px rgba(244, 63, 94, 0.25);
+    background: var(--crimson-solid-hover) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
 }
 
 .action-btn.danger-action:active, #freeBtn:active {
-    background: var(--crimson-btn-active);
-    color: #FFFFFF;
+    background: var(--crimson-solid-active) !important;
+    transform: translateY(1px);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Hunter Selection Bar
-   ───────────────────────────────────────────────────────────── */
+/* ==========================================================================
+   Hunter Selection Bar - Broadcast Scaled
+   ========================================================================== */
 .hunter-bar {
     display: flex;
     align-items: center;
@@ -81,134 +86,176 @@
     padding: 4px;
     background: var(--sgd-bg-sidebar);
     border: 1px solid var(--sgd-border-default);
+    width: 100%;
 }
 
 .hunter-icon {
-    width: 26px;
-    height: 26px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #181B20;
+    background: #141820;
     border: 1px solid var(--sgd-border-subtle);
     color: var(--sgd-brand-green);
-    font-size: 13px;
+    font-size: 16px;
     flex-shrink: 0;
 }
 
 .hunter-select {
     flex: 1;
-    height: 26px;
-    background: var(--sgd-bg-void);
+    height: 32px;
+    background: #141820;
     border: 1px solid var(--sgd-border-default);
-    color: var(--sgd-text-primary);
+    color: #F1F5F9;
     font-size: 11px;
-    padding: 0 6px;
+    font-weight: 600;
+    padding: 0 8px;
     cursor: pointer;
+    outline: none;
 }
 
 .hunter-select:focus {
     border-color: var(--sgd-cat-tools-cyan);
+    background: #1A202A;
 }
 
 .hunter-select option {
-    background: var(--sgd-bg-void);
-    color: var(--sgd-text-primary);
+    background: #141820;
+    color: #F1F5F9;
+    padding: 4px;
 }
 
-.hunter-actions {
+.order-btns, .hunter-actions {
     display: flex;
     gap: 2px;
 }
 
 .order-btn, .refresh-btn {
-    width: 26px;
-    height: 26px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--slate-btn-bg);
-    border: 1px solid var(--sgd-border-subtle);
-    color: var(--sgd-text-secondary);
+    background: #202633;
+    border: 1px solid #2E384A;
+    color: #94A3B8;
     cursor: pointer;
+    font-size: 14px;
     transition: all var(--transition);
+    outline: none;
 }
 
 .order-btn:hover, .refresh-btn:hover {
-    background: var(--slate-btn-hover);
+    background: #2A3343;
     color: #FFFFFF;
-    border-color: var(--sgd-cat-tools-cyan);
+    border-color: #38BDF8;
 }
 
 .order-btn.active {
-    background: var(--sgd-cat-tools-cyan);
-    color: #09131C;
-    border-color: var(--sgd-cat-tools-cyan);
+    background: var(--cyan-solid-hover) !important;
+    color: #FFFFFF !important;
+    border-color: var(--cyan-solid-border) !important;
+    font-weight: 800;
+    box-shadow: 0 0 8px rgba(14, 165, 233, 0.4);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Options & Motion Delays Panel
-   ───────────────────────────────────────────────────────────── */
+/* ==========================================================================
+   Options & Motion Delays Panel - Solid Fill & High Proportion
+   ========================================================================== */
 .options-section {
     background: var(--sgd-bg-sidebar);
     border: 1px solid var(--sgd-border-default);
-    padding: 6px;
+    padding: 8px;
     display: flex;
     flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.options-toggles-row, .options-toggles-group, .toggle-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 6px;
+    width: 100%;
 }
 
-.options-toggles-group {
+.options-row {
     display: flex;
-    gap: 4px;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
 }
 
-.option-toggle {
-    flex: 1;
-    height: 26px;
+.option-toggle, .option-toggle-btn {
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    background: var(--sgd-bg-void);
-    border: 1px solid var(--sgd-border-default);
-    color: var(--sgd-text-muted);
-    font-size: 10px;
+    gap: 7px;
+    background: #202633;
+    border: 1px solid #2F394A;
+    color: #94A3B8;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     transition: all var(--transition);
+    padding: 0 10px;
+    outline: none;
 }
 
-.option-toggle:hover {
-    background: #1C2028;
-    color: var(--sgd-text-secondary);
-    border-color: var(--sgd-border-strong);
+.option-toggle i, .option-toggle-btn i {
+    font-size: 14px;
 }
 
-.option-toggle.active {
-    background: var(--green-bank-bg);
-    border: 1px solid var(--green-bank-border);
-    border-top: 2px solid var(--sgd-brand-green);
-    color: var(--sgd-brand-green);
+.option-toggle:hover, .option-toggle-btn:hover {
+    background: #2A3343;
+    color: #FFFFFF;
+    border-color: #3E4B5E;
 }
 
-.delay-inputs-group {
+/* Active Toggle: Full Solid Vibrant Green Fill */
+.option-toggle.active, .option-toggle-btn.active {
+    background: #16A34A !important;
+    border: 1px solid #4ADE80 !important;
+    color: #FFFFFF !important;
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(22, 163, 74, 0.4);
+}
+
+.option-toggle.active i, .option-toggle-btn.active i {
+    color: #FFFFFF !important;
+}
+
+.options-delays-row, .delay-inputs-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4px;
+    gap: 6px;
+    width: 100%;
 }
 
-.delay-input-item {
+.delay-control-card, .delay-input-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #141820;
+    border: 1px solid #262F3E;
+    padding: 6px 8px;
+}
+
+.delay-card-header, .delay-input-label {
     display: flex;
     align-items: center;
-    gap: 4px;
-    background: var(--sgd-bg-void);
-    border: 1px solid var(--sgd-border-default);
-    padding: 2px 4px;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #F59E0B;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-.delay-input-item i {
-    color: var(--sgd-cat-zoom-amber);
+.delay-card-header i, .delay-input-item > i {
+    color: #F59E0B;
     font-size: 13px;
 }
 
@@ -216,34 +263,45 @@
     display: flex;
     align-items: center;
     width: 100%;
+    background: #1C222C;
+    border: 1px solid #2B3545;
+    height: 28px;
 }
 
 .smart-btn {
-    width: 18px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--slate-btn-bg);
-    border: 1px solid var(--sgd-border-subtle);
-    color: var(--sgd-text-secondary);
+    background: #262F3E;
+    border: none;
+    color: #E2E8F0;
     cursor: pointer;
-    font-size: 9px;
+    font-size: 12px;
+    transition: all var(--transition);
+    outline: none;
 }
 
 .smart-btn:hover {
-    background: var(--slate-btn-hover);
+    background: #364356;
     color: #FFFFFF;
+}
+
+.smart-btn:active {
+    background: #1E2532;
 }
 
 .smart-value {
     flex: 1;
-    height: 20px;
+    height: 28px;
     background: transparent;
     border: none;
-    color: var(--sgd-text-primary);
+    color: #FFFFFF;
     font-family: var(--font-mono);
-    font-size: 10px;
+    font-size: 11px;
+    font-weight: 700;
     text-align: center;
-    width: 32px;
+    outline: none;
+    width: 36px;
 }

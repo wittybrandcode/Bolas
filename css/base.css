@@ -56,12 +56,12 @@ body {
 /* Brand Badge: Spider Logo Container */
 .logo {
     height: 26px;
-    padding: 0 6px;
+    padding: 0 7px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    background: #181B20;
+    gap: 6px;
+    background: #141820;
     border: 1px solid rgba(140, 198, 63, 0.65);
     color: var(--sgd-brand-green);
     cursor: default;
@@ -70,7 +70,13 @@ body {
 
 .logo:hover {
     border-color: var(--sgd-brand-green);
-    box-shadow: 0 0 8px var(--sgd-brand-glow);
+    box-shadow: 0 0 10px var(--sgd-brand-glow);
+}
+
+.logo svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
 }
 
 .logo i {

@@ -1,27 +1,27 @@
 /**
- * BolasPro v4.0 - Smart Chain Operations Styles
+ * BolasPro v5.0 - Smart Chain Operations Styles
+ * Solid Fill Tactical Buttons, Zero-Radius, High Contrast Broadcast Controls
  */
 
-/* ═══════════════════════════════════════════════════════════════
+/* ==========================================================================
    Container
-   ═══════════════════════════════════════════════════════════════ */
-
+   ========================================================================== */
 .smart-chain-operations {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 12px;
-    background: var(--bg-darkest, #1a1a1a);
-    border-radius: var(--radius-md, 6px);
-    margin-top: 12px;
-    border: 1px solid var(--border, #333);
-    animation: fadeIn 0.2s ease;
+    gap: 10px;
+    padding: 10px;
+    background: #141820;
+    margin-top: 10px;
+    border: 1px solid var(--sgd-border-default);
+    animation: fadeIn 0.15s ease;
+    width: 100%;
 }
 
 @keyframes fadeIn {
     from { 
         opacity: 0; 
-        transform: translateY(-5px); 
+        transform: translateY(-4px); 
     }
     to { 
         opacity: 1; 
@@ -29,14 +29,14 @@
     }
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ==========================================================================
    Sections
-   ═══════════════════════════════════════════════════════════════ */
-
+   ========================================================================== */
 .operations-section {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
+    width: 100%;
 }
 
 .operations-label {
@@ -44,176 +44,136 @@
     align-items: center;
     gap: 6px;
     font-size: 10px;
-    font-weight: 600;
-    color: var(--text-dim, #888);
+    font-weight: 700;
+    color: #94A3B8;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.08em;
 }
 
 .operations-label i {
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .unchain-section .operations-label {
-    color: #f97316;
+    color: #FB923C;
 }
 
 .delete-section .operations-label {
-    color: #ef4444;
+    color: #F87171;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ==========================================================================
    Buttons Container
-   ═══════════════════════════════════════════════════════════════ */
-
+   ========================================================================== */
 .operations-buttons {
     display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   Operation Buttons
-   ═══════════════════════════════════════════════════════════════ */
-
+/* ==========================================================================
+   Operation Buttons - Solid Tactical Tiles
+   ========================================================================== */
 .op-btn {
     flex: 1;
-    min-width: 60px;
-    height: 36px;
+    min-width: 65px;
+    height: 38px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2px;
-    background: var(--bg-light, #2a2a2a);
-    border: 1px solid var(--border, #333);
-    border-radius: var(--radius-sm, 4px);
-    color: var(--text-secondary, #aaa);
+    gap: 3px;
+    background: #202633;
+    border: 1px solid #2E3848;
+    color: #CBD5E1;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all var(--transition);
     font-family: inherit;
-    padding: 4px 8px;
+    padding: 4px 6px;
+    outline: none;
 }
 
 .op-btn i {
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .op-btn span {
-    font-size: 9px;
-    font-weight: 500;
+    font-size: 10px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.05em;
 }
 
-/* Hover States */
+/* Hover States: Solid Filled Highlights */
 .op-btn:hover:not(:disabled) {
-    background: var(--bg-hover, #333);
-    border-color: var(--border-light, #444);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: #2B3547;
+    border-color: #38BDF8;
+    color: #FFFFFF;
 }
 
 .unchain-section .op-btn:hover:not(:disabled) {
-    background: rgba(249, 115, 22, 0.15);
-    border-color: #f97316;
-    color: #f97316;
+    background: #C2410C !important;
+    border-color: #FB923C !important;
+    color: #FFFFFF !important;
 }
 
 .delete-section .op-btn:hover:not(:disabled) {
-    background: rgba(239, 68, 68, 0.15);
-    border-color: #ef4444;
-    color: #ef4444;
+    background: #B91C1C !important;
+    border-color: #F87171 !important;
+    color: #FFFFFF !important;
 }
 
-/* Active/Click State */
+/* Active / Focus */
 .op-btn:active:not(:disabled) {
-    transform: translateY(0);
-    box-shadow: none;
+    transform: translateY(1px);
 }
 
 /* Disabled State */
 .op-btn:disabled,
 .op-btn.disabled {
-    opacity: 0.3;
+    opacity: 0.35;
+    background: #181D26 !important;
+    border-color: #242B37 !important;
+    color: #64748B !important;
     cursor: not-allowed;
     transform: none !important;
     box-shadow: none !important;
 }
 
-/* Warning State (for cascade with followers) */
-.op-btn.warning {
-    border-color: #f59e0b;
-    animation: pulse-warning 2s infinite;
+/* Warning & Danger Actions (Cascade, Reconnect, Promote) */
+.op-btn.warning, #deleteCascadeBtn:not(:disabled) {
+    background: #9A3412 !important;
+    border-color: #EA580C !important;
+    color: #FFFFFF !important;
 }
 
-@keyframes pulse-warning {
-    0%, 100% {
-        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 0 4px rgba(245, 158, 11, 0);
-    }
+.op-btn.warning:hover, #deleteCascadeBtn:hover:not(:disabled) {
+    background: #C2410C !important;
+    border-color: #FB923C !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   Danger Buttons (Delete Section)
-   ═══════════════════════════════════════════════════════════════ */
-
-.op-btn.danger {
-    background: var(--bg-light, #2a2a2a);
+#deletePromoteBtn:not(:disabled) {
+    background: #854D0E !important;
+    border-color: #CA8A04 !important;
+    color: #FFFFFF !important;
 }
 
-.op-btn.danger:hover:not(:disabled) {
-    background: rgba(239, 68, 68, 0.15);
-    border-color: #ef4444;
-    color: #ef4444;
+#deleteReconnectBtn:not(:disabled) {
+    background: #0369A1 !important;
+    border-color: #0284C7 !important;
+    color: #FFFFFF !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   Responsive Adjustments
-   ═══════════════════════════════════════════════════════════════ */
-
+/* Responsive Adjustments */
 @media (max-width: 300px) {
     .operations-buttons {
         flex-direction: column;
     }
     
     .op-btn {
-        flex: none;
         width: 100%;
         flex-direction: row;
         height: 32px;
         gap: 8px;
     }
-    
-    .op-btn span {
-        font-size: 10px;
-    }
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   Tooltip Styles (if using custom tooltips)
-   ═══════════════════════════════════════════════════════════════ */
-
-.op-btn[title] {
-    position: relative;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   Loading State
-   ═══════════════════════════════════════════════════════════════ */
-
-.op-btn.loading {
-    pointer-events: none;
-    opacity: 0.7;
-}
-
-.op-btn.loading i {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
 }

@@ -28,7 +28,25 @@
         <header class="header">
             <div class="header-left">
                 <div class="logo" title="BolasPro - Modular Follow Kinematics">
-                    <i class="ph-bold ph-spider"></i>
+                    <!-- Geometric Cyber-Spider Vector Logo (Zero Curves, Faceted Kinematic Spider) -->
+                    <svg class="bolas-spider-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Head -->
+                        <polygon points="12,2 15,5 9,5" fill="#8CC63F" />
+                        <!-- Thorax Matrix -->
+                        <polygon points="12,6 16,10 12,14 8,10" fill="#8CC63F" />
+                        <!-- Abdomen Anchor -->
+                        <polygon points="12,15 15,19 12,22 9,19" fill="#38BDF8" />
+                        <!-- Left Legs -->
+                        <polyline points="8,8 3,5 1,8" stroke="#8CC63F" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" />
+                        <polyline points="7,10 2,10 0,13" stroke="#8CC63F" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" />
+                        <polyline points="8,12 3,15 1,18" stroke="#8CC63F" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" />
+                        <!-- Right Legs -->
+                        <polyline points="16,8 21,5 23,8" stroke="#8CC63F" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" />
+                        <polyline points="17,10 22,10 24,13" stroke="#8CC63F" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" />
+                        <polyline points="16,12 21,15 23,18" stroke="#8CC63F" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" />
+                        <!-- Bolas Hunting Line & Node -->
+                        <line x1="12" y1="22" x2="12" y2="24" stroke="#38BDF8" stroke-width="2" />
+                    </svg>
                     <span class="logo-text">BOLAS</span>
                 </div>
             </div>
@@ -41,26 +59,26 @@
             <div class="header-actions">
                 <div class="header-actions-bank">
                     <button class="header-btn" id="presetsBtn" title="Rig Presets & Motion Templates">
-                        <i class="ph-bold ph-bookmarks"></i>
+                        <i class="ph-fill ph-bookmarks"></i>
                     </button>
                     <button class="header-btn" id="settingsBtn" title="Settings & Language">
-                        <i class="ph-bold ph-gear-six"></i>
+                        <i class="ph-fill ph-gear-six"></i>
                     </button>
                     <button class="header-btn" id="infoBtn" title="About BolasPro">
-                        <i class="ph-bold ph-info"></i>
+                        <i class="ph-fill ph-info"></i>
                     </button>
                 </div>
             </div>
         </header>
 
-        <!-- Action Bar -->
+        <!-- Action Bar: Solid Cyan Snag & Solid Crimson Free -->
         <div class="action-bar">
             <button class="action-btn primary" id="snagBtn" title="Snag Layers (Alt+S / Ctrl+Shift+S)">
-                <i class="ph-bold ph-link"></i>
+                <i class="ph-fill ph-link"></i>
                 <span>Snag</span>
             </button>
-            <button class="action-btn" id="freeBtn" title="Free Layers (Ctrl+F)">
-                <i class="ph-bold ph-link-break"></i>
+            <button class="action-btn danger-action" id="freeBtn" title="Free Layers (Ctrl+F)">
+                <i class="ph-fill ph-link-break"></i>
                 <span>Free</span>
             </button>
         </div>
@@ -76,13 +94,13 @@
                     <option value="">Select Hunter...</option>
                 </select>
                 <button class="refresh-btn" id="refreshLayers" title="Refresh Layers">
-                    <i class="ph ph-arrows-clockwise"></i>
+                    <i class="ph-bold ph-arrows-clockwise"></i>
                 </button>
                 <div class="order-btns">
-                    <button class="order-btn active" data-order="asc" title="Ascending (صعوداً)">
+                    <button class="order-btn active" data-order="asc" title="Ascending (Order)">
                         <i class="ph-bold ph-sort-ascending"></i>
                     </button>
-                    <button class="order-btn" data-order="desc" title="Descending (نزولاً)">
+                    <button class="order-btn" data-order="desc" title="Descending (Order)">
                         <i class="ph-bold ph-sort-descending"></i>
                     </button>
                 </div>
@@ -97,10 +115,10 @@
                     </div>
                     <div class="bolas-tabs" id="bolasTabs">
                         <button class="bolas-tab active" data-tab="setup" title="Setup (Source + Attach)">
-                            <i class="ph-bold ph-gear"></i>
+                            <i class="ph-fill ph-gear-six"></i>
                         </button>
                         <button class="bolas-tab" data-tab="chain" title="Chain View">
-                            <i class="ph-bold ph-link-simple"></i>
+                            <i class="ph-fill ph-tree-structure"></i>
                         </button>
                     </div>
                 </div>
@@ -146,7 +164,7 @@
                         <!-- Cyan Bank: Selection & Reorder Tools -->
                         <div class="chain-tools-bank-cyan" title="Selection Tools">
                             <button class="chain-tool-btn cyan-btn" id="selectAllChain" title="[Tools] Select All Chain Layers">
-                                <i class="ph-bold ph-selection-all"></i>
+                                <i class="ph-fill ph-selection-all"></i>
                             </button>
                             <button class="chain-tool-btn cyan-btn" id="refreshChain" title="[Tools] Refresh Chain Topology">
                                 <i class="ph-bold ph-arrows-clockwise"></i>
@@ -155,34 +173,34 @@
                         <!-- Green Bank: Show/Hide Guides -->
                         <div class="chain-tools-bank-green" title="Viewport Guides">
                             <button class="chain-tool-btn green-btn" id="guidesBtn" title="[Guides] Toggle Viewport Guides in AE">
-                                <i class="ph-bold ph-eye"></i>
+                                <i class="ph-fill ph-eye"></i>
                             </button>
                         </div>
                         <!-- Amber Bank: Rig Presets -->
                         <div class="chain-tools-bank-amber" title="Presets & Physics">
                             <button class="chain-tool-btn amber-btn" id="presetsToolbarBtn" title="[Presets] Open Rig Templates">
-                                <i class="ph-bold ph-bookmarks"></i>
+                                <i class="ph-fill ph-bookmarks"></i>
                             </button>
                         </div>
                         <!-- Crimson Bank: Break & Unchain -->
                         <div class="chain-tools-bank-crimson" title="Critical Actions">
                             <button class="chain-tool-btn crimson-btn" id="unchainBtn" title="[Break] Unchain Selected Layer">
-                                <i class="ph-bold ph-link-break"></i>
+                                <i class="ph-fill ph-link-break"></i>
                             </button>
                             <button class="chain-tool-btn crimson-btn" id="breakAllBtn" title="[Break] Break All Chains in Comp">
-                                <i class="ph-bold ph-trash"></i>
+                                <i class="ph-fill ph-trash"></i>
                             </button>
                         </div>
                     </div>
                     <!-- Pin Layer Indicator -->
                     <div class="selection-indicator" id="selectionIndicator" title="Select a free layer in AE">
-                        <i class="ph-bold ph-push-pin indicator-icon"></i>
+                        <i class="ph-fill ph-push-pin indicator-icon"></i>
                         <span class="selection-name">Select layer to pin</span>
                         <button class="clear-btn" title="Clear pinned layer">
                             <i class="ph-bold ph-x"></i>
                         </button>
                         <button class="pin-btn" title="Pin/Unpin layer">
-                            <i class="ph-bold ph-push-pin"></i>
+                            <i class="ph-fill ph-push-pin"></i>
                         </button>
                     </div>
                     <div class="chain-timeline" id="chainTimeline">
@@ -198,7 +216,7 @@
                     <div class="chain-controls-panel" id="chainControlsPanel">
                         <div class="chain-controls-header">
                             <div class="chain-controls-title">
-                                <i class="ph-bold ph-sliders"></i>
+                                <i class="ph-fill ph-sliders"></i>
                                 <span>Layer Controls</span>
                             </div>
                             <span class="chain-controls-badge">prey</span>
@@ -212,39 +230,45 @@
 
             <!-- Options Section (visible only in Chain tab) -->
             <section class="section options-section" id="optionsSection">
-                <div class="options-row">
-                    <div class="toggle-group">
-                        <button class="option-toggle active" id="lockOrientationBtn" title="Lock Orientation">
-                            <i class="ph-bold ph-lock-simple"></i>
-                        </button>
-                        <button class="option-toggle" id="maintainOffsetBtn" title="Maintain Offset">
-                            <i class="ph-bold ph-arrows-out-cardinal"></i>
-                        </button>
-                    </div>
-                    <div class="delay-inputs-group">
-                        <div class="delay-input-item">
-                            <i class="ph ph-clock-countdown" title="Position Delay"></i>
-                            <div class="smart-input">
-                                <button class="smart-btn decrement" data-target="positionDelay">
-                                    <i class="ph-bold ph-minus"></i>
-                                </button>
-                                <input type="number" min="0" max="100" step="0.1" value="0" class="smart-value" id="positionDelayInput">
-                                <button class="smart-btn increment" data-target="positionDelay">
-                                    <i class="ph-bold ph-plus"></i>
-                                </button>
-                            </div>
+                <div class="options-toggles-row">
+                    <button class="option-toggle active" id="lockOrientationBtn" title="Lock Orientation">
+                        <i class="ph-fill ph-lock-key"></i>
+                        <span>Lock Orientation</span>
+                    </button>
+                    <button class="option-toggle" id="maintainOffsetBtn" title="Maintain Offset">
+                        <i class="ph-fill ph-arrows-out-cardinal"></i>
+                        <span>Maintain Offset</span>
+                    </button>
+                </div>
+                <div class="options-delays-row">
+                    <div class="delay-control-card">
+                        <div class="delay-card-header">
+                            <i class="ph-fill ph-clock-countdown"></i>
+                            <span>Position Delay</span>
                         </div>
-                        <div class="delay-input-item">
-                            <i class="ph ph-arrow-clockwise" title="Rotation Delay"></i>
-                            <div class="smart-input">
-                                <button class="smart-btn decrement" data-target="rotationDelay">
-                                    <i class="ph-bold ph-minus"></i>
-                                </button>
-                                <input type="number" min="0" max="100" step="0.1" value="0" class="smart-value" id="rotationDelayInput">
-                                <button class="smart-btn increment" data-target="rotationDelay">
-                                    <i class="ph-bold ph-plus"></i>
-                                </button>
-                            </div>
+                        <div class="smart-input">
+                            <button class="smart-btn decrement" data-target="positionDelay">
+                                <i class="ph-bold ph-minus"></i>
+                            </button>
+                            <input type="number" min="0" max="100" step="0.1" value="0" class="smart-value" id="positionDelayInput">
+                            <button class="smart-btn increment" data-target="positionDelay">
+                                <i class="ph-bold ph-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="delay-control-card">
+                        <div class="delay-card-header">
+                            <i class="ph-fill ph-arrow-clockwise"></i>
+                            <span>Rotation Delay</span>
+                        </div>
+                        <div class="smart-input">
+                            <button class="smart-btn decrement" data-target="rotationDelay">
+                                <i class="ph-bold ph-minus"></i>
+                            </button>
+                            <input type="number" min="0" max="100" step="0.1" value="0" class="smart-value" id="rotationDelayInput">
+                            <button class="smart-btn increment" data-target="rotationDelay">
+                                <i class="ph-bold ph-plus"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

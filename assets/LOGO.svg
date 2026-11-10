@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1496.1 360.33">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #999;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #e6e6e6;
+      }
+
+      .cls-3 {
+        fill: #f2f2f2;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <g>
+        <rect class="cls-1" x="72" y="27" width="216" height="18"/>
+        <rect class="cls-1" x="72" y="171" width="216" height="18"/>
+        <rect class="cls-1" x="72" y="315" width="216" height="18"/>
+        <rect class="cls-1" x="216" y="171" width="216" height="18" transform="translate(504 -144) rotate(90)"/>
+        <rect class="cls-1" x="-72" y="171" width="216" height="18" transform="translate(216 144) rotate(90)"/>
+        <rect class="cls-1" x="72" y="171" width="216" height="18" transform="translate(360 0) rotate(90)"/>
+      </g>
+      <g>
+        <rect class="cls-3" x="144" y="288" width="72" height="72"/>
+        <rect class="cls-3" x="288" y="288" width="72" height="72"/>
+        <rect class="cls-3" x="288" y="144" width="72" height="72"/>
+        <rect class="cls-3" y="288" width="72" height="72"/>
+        <rect class="cls-3" x="144" y="144" width="72" height="72"/>
+        <rect class="cls-3" x="288" width="72" height="72"/>
+        <rect class="cls-3" x="144" width="72" height="72"/>
+        <rect class="cls-3" y="144" width="72" height="72"/>
+        <rect class="cls-3" width="72" height="72"/>
+      </g>
+      <path class="cls-2" d="m608.82,327.45c0,21.92-10.96,32.88-32.88,32.88h-143.72V.46h142.8c21.31,0,31.96,11.04,31.96,33.11v92.67c0,12.27-3.83,21.77-11.5,28.51-1.08.92-10.43,6.82-28.05,17.71,18.24,11.19,27.9,17.32,28.97,18.4,8.28,7.21,12.42,17.1,12.42,29.66v106.93Zm-55.42-194.54V45.76h-67.37v105.55h41.39l25.98-18.4Zm1.38,182.12v-102.56l-26.44-17.48h-42.31v120.03h68.75Z"/>
+      <path class="cls-2" d="m844.21,327.45c0,21.92-10.89,32.88-32.65,32.88h-116.81c-21.31,0-31.96-10.96-31.96-32.88V33.57c0-22.07,10.65-33.11,31.96-33.11h116.81c21.76,0,32.65,11.04,32.65,33.11v293.87Zm-53.81-13.34V46.68h-73.81v267.43h73.81Z"/>
+      <path class="cls-2" d="m1057.18,360.33h-141.42V.46h53.81v311.81h87.61v48.06Z"/>
+      <path class="cls-2" d="m1289.17,360.33h-53.35l-10.81-68.29h-67.38l-10.81,68.29h-53.12v-.92L1163.39,0h56.57l69.21,360.33Zm-71.74-114.51l-26.21-162.34-26.44,162.34h52.66Z"/>
+      <path class="cls-2" d="m1496.1,327.45c0,21.92-10.89,32.88-32.65,32.88h-108.31c-21.62,0-32.42-10.96-32.42-32.88v-85.77h53.81v73.35h65.76v-70.59l-107.84-102.1c-7.82-7.51-11.73-17.09-11.73-28.74V33.57c0-22.07,10.81-33.11,32.42-33.11h108.31c21.77,0,32.65,10.89,32.65,32.65v80.48h-53.81V45.76h-65.76v65.08l107.85,101.64c7.82,7.36,11.73,17.1,11.73,29.2v85.77Z"/>
+    </g>
+  </g>
+</svg>

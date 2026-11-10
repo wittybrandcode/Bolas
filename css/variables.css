@@ -63,6 +63,37 @@
     --cyan-btn-hover: #274056;
     --cyan-btn-text: #7DD3FC;
 
+    /* Solid Action Colors (Full Fill Broadcast Grade) */
+    --cyan-solid-bg: #0284C7;
+    --cyan-solid-hover: #0EA5E9;
+    --cyan-solid-active: #0369A1;
+    --cyan-solid-border: #38BDF8;
+    --cyan-solid-text: #FFFFFF;
+
+    --crimson-solid-bg: #DC2626;
+    --crimson-solid-hover: #EF4444;
+    --crimson-solid-active: #B91C1C;
+    --crimson-solid-border: #F87171;
+    --crimson-solid-text: #FFFFFF;
+
+    --green-solid-bg: #8CC63F;
+    --green-solid-hover: #9ED454;
+    --green-solid-active: #76A935;
+    --green-solid-border: #BEF264;
+    --green-solid-text: #0A1017;
+
+    --amber-solid-bg: #D97706;
+    --amber-solid-hover: #F59E0B;
+    --amber-solid-active: #B45309;
+    --amber-solid-border: #FCD34D;
+    --amber-solid-text: #FFFFFF;
+
+    --slate-solid-bg: #202633;
+    --slate-solid-hover: #2B3445;
+    --slate-solid-active: #181D27;
+    --slate-solid-border: #323D4F;
+    --slate-solid-text: #E2E8F0;
+
     /* 2. Show/Hide & Connection Status — Radiant Green */
     --sgd-cat-visibility-green: #8CC63F;
     --green-bank-bg: #162011;

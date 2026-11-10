@@ -1,20 +1,21 @@
-/* ═══════════════════════════════════════════════════════════════
+/* ==========================================================================
    BolasPro v5.0 - SGD Pro Bolas Grid (3x3 Technical Matrix)
-   Zero-Radius, Crosshair Matrix, Precision Nodes
-   ═══════════════════════════════════════════════════════════════ */
+   Zero-Radius, Solid Fills, Precision Proportions, No Outline Look
+   ========================================================================== */
 
 .bolas-section {
     background: var(--sgd-bg-sidebar);
     border: 1px solid var(--sgd-border-default);
     overflow: hidden;
+    width: 100%;
 }
 
 .bolas-header {
-    height: 32px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 8px;
+    padding: 0 10px;
     background: var(--sgd-bg-header);
     border-bottom: 1px solid var(--sgd-border-default);
 }
@@ -22,8 +23,8 @@
 .bolas-title {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 10px;
+    gap: 7px;
+    font-size: 11px;
     font-weight: 700;
     color: var(--sgd-text-primary);
     text-transform: uppercase;
@@ -32,125 +33,146 @@
 
 .bolas-title i {
     color: var(--sgd-brand-green);
-    font-size: 13px;
+    font-size: 15px;
 }
 
-/* Bolas Tabs: Sharp Rectangular Bar */
+/* Bolas Tabs: Solid Rectangular Bank (Zero White Squares) */
 .bolas-tabs {
     display: flex;
-    gap: 1px;
-    background: var(--sgd-bg-void);
-    padding: 2px;
+    gap: 3px;
+    background: #12161E;
+    padding: 3px;
     border: 1px solid var(--sgd-border-subtle);
 }
 
-.tab-btn {
-    padding: 3px 10px;
-    height: 22px;
+.bolas-tab, .tab-btn {
+    height: 24px;
+    padding: 0 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
-    border: none;
-    color: var(--sgd-text-muted);
-    font-size: 10px;
+    gap: 4px;
+    background: #1E2532 !important;
+    border: 1px solid #2F394A !important;
+    color: #94A3B8 !important;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     transition: all var(--transition);
+    outline: none;
 }
 
-.tab-btn:hover {
-    color: var(--sgd-text-primary);
-    background: var(--slate-btn-bg);
+.bolas-tab:hover, .tab-btn:hover {
+    color: #FFFFFF !important;
+    background: #2B3547 !important;
+    border-color: #3E4B5E !important;
 }
 
-.tab-btn.active {
-    background: var(--cyan-btn-bg);
-    border: 1px solid var(--cyan-bank-border);
-    border-top: 2px solid var(--sgd-cat-tools-cyan);
-    color: #FFFFFF;
+.bolas-tab.active, .tab-btn.active {
+    background: var(--cyan-solid-bg) !important;
+    border: 1px solid var(--cyan-solid-border) !important;
+    color: #FFFFFF !important;
+    font-weight: 700;
 }
 
-.tab-btn[data-tab="chain"].active {
-    background: var(--amber-bank-bg);
-    border: 1px solid var(--amber-bank-border);
-    border-top: 2px solid var(--sgd-cat-zoom-amber);
-    color: #FFFFFF;
+.bolas-tab[data-tab="chain"].active, .tab-btn[data-tab="chain"].active {
+    background: var(--amber-solid-bg) !important;
+    border: 1px solid var(--amber-solid-border) !important;
+    color: #FFFFFF !important;
+    font-weight: 700;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Two 3x3 Matrices Side-by-Side (Source & Attach)
-   ───────────────────────────────────────────────────────────── */
+/* ==========================================================================
+   Two 3x3 Matrices Side-by-Side (Source & Attach) - Full Proportions
+   ========================================================================== */
 .bolas-content {
-    padding: 8px;
+    padding: 10px;
+    width: 100%;
 }
 
 .setup-grids {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 10px;
+    width: 100%;
 }
 
 .setup-grid-item {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    background: var(--sgd-bg-void);
-    border: 1px solid var(--sgd-border-default);
-    padding: 6px;
+    gap: 6px;
+    background: #141820;
+    border: 1px solid #262F3E;
+    padding: 8px;
+    width: 100%;
 }
 
 .setup-grid-label {
     font-family: var(--font-mono);
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--sgd-text-secondary);
+    letter-spacing: 0.12em;
+    color: #CBD5E1;
     text-align: center;
-    padding-bottom: 2px;
-    border-bottom: 1px solid var(--sgd-border-subtle);
+    padding: 4px 0;
+    background: #1C2330;
+    border: 1px solid #2B3648;
+    text-transform: uppercase;
 }
 
 .bolas-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 3px;
-    aspect-ratio: 1;
-    margin-top: 4px;
+    gap: 4px;
+    width: 100%;
+    margin-top: 2px;
 }
 
-/* Technical Square Nodes (Zero-Radius) */
+/* Technical Square Nodes (Solid Slate Fill, Zero Hollow) */
 .bolas-dot {
+    height: 38px;
+    min-height: 38px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #1C2028;
-    border: 1px solid var(--sgd-border-subtle);
-    color: var(--sgd-text-muted);
+    background: #202735;
+    border: 1px solid #2E384A;
+    color: #94A3B8;
     cursor: pointer;
-    font-size: 11px;
-    transition: all var(--transition);
-    position: relative;
+    font-size: 14px;
+    transition: all 0.1s ease;
+    outline: none;
 }
 
 .bolas-dot:hover {
-    background: #252B36;
-    border-color: var(--sgd-cat-tools-cyan);
+    background: #2C3547;
+    border-color: #38BDF8;
     color: #FFFFFF;
 }
 
-/* Active Source Node: Radiant Green */
+/* Active Source Node: Full Solid Radiant Green Fill */
 #sourceGrid .bolas-dot.active {
-    background: var(--sgd-brand-green);
-    border: 1px solid #ECFCCB;
-    color: var(--sgd-brand-dark);
-    box-shadow: 0 0 6px var(--sgd-brand-glow);
+    background: var(--green-solid-bg) !important;
+    border: 1px solid var(--green-solid-border) !important;
+    color: var(--green-solid-text) !important;
+    font-weight: 800;
+    box-shadow: 0 0 10px rgba(140, 198, 63, 0.45);
 }
 
-/* Active Attach Node: Cyan */
+#sourceGrid .bolas-dot.active i {
+    color: #0A1017 !important;
+}
+
+/* Active Attach Node: Full Solid Cyan Fill */
 #attachGrid .bolas-dot.active {
-    background: var(--sgd-cat-tools-cyan);
-    border: 1px solid #E0F2FE;
-    color: #09131C;
-    box-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
+    background: var(--cyan-solid-hover) !important;
+    border: 1px solid #BAE6FD !important;
+    color: #09131C !important;
+    font-weight: 800;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.45);
+}
+
+#attachGrid .bolas-dot.active i {
+    color: #09131C !important;
 }
