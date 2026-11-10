@@ -272,6 +272,18 @@ var AESelectionSync = (function() {
         return false;
     }
 
+    
+    function updateTelemetryUI(compName, layerCount) {
+        var compEl = document.getElementById('telemetryCompName');
+        var layersEl = document.getElementById('telemetryLayers');
+        if (compEl) {
+            compEl.textContent = compName ? compName : 'No Comp';
+        }
+        if (layersEl) {
+            layersEl.textContent = (layerCount !== undefined && layerCount !== null) ? (layerCount + ' Layers') : '0 Layers';
+        }
+    }
+
     function handleCompositionChange(result) {
         log('Composition changed: ' + result.compName);
         

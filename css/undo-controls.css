@@ -1,80 +1,28 @@
-/**
- * BolasPro v5.0 - Undo Controls Styles
- */
 
-/* Undo Controls Container */
 .undo-controls {
     display: flex;
     gap: 2px;
-    margin-right: 8px;
 }
 
-/* Undo/Redo Buttons */
-.undo-btn,
-.redo-btn {
+.undo-btn, .redo-btn {
+    width: 20px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    border: none;
-    border-radius: 4px;
-    background: var(--bg-tertiary, rgba(255, 255, 255, 0.05));
-    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+    background: var(--slate-btn-bg);
+    border: 1px solid var(--sgd-border-subtle);
+    color: var(--sgd-text-secondary);
     cursor: pointer;
-    transition: all 0.15s ease;
+    font-size: 10px;
 }
 
-.undo-btn:hover:not(:disabled),
-.redo-btn:hover:not(:disabled) {
-    background: var(--bg-hover, rgba(255, 255, 255, 0.1));
-    color: var(--text-primary, #fff);
+.undo-btn:hover:not(:disabled), .redo-btn:hover:not(:disabled) {
+    background: var(--slate-btn-hover);
+    color: #FFFFFF;
 }
 
-.undo-btn:active:not(:disabled),
-.redo-btn:active:not(:disabled) {
-    transform: scale(0.95);
-}
-
-.undo-btn:disabled,
-.redo-btn:disabled {
+.undo-btn:disabled, .redo-btn:disabled {
     opacity: 0.3;
-    cursor: not-allowed;
-}
-
-.undo-btn i,
-.redo-btn i {
-    font-size: 14px;
-}
-
-/* Active state when there's history */
-.undo-btn.has-history,
-.redo-btn.has-history {
-    color: var(--accent-primary, #4ade80);
-}
-
-.undo-btn.has-history:hover,
-.redo-btn.has-history:hover {
-    background: var(--accent-primary-dim, rgba(74, 222, 128, 0.15));
-}
-
-/* Tooltip enhancement */
-.undo-btn[title]:hover::after,
-.redo-btn[title]:hover::after {
-    content: attr(title);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 4px 8px;
-    background: var(--bg-elevated, #2a2a2a);
-    color: var(--text-primary, #fff);
-    font-size: 11px;
-    white-space: nowrap;
-    border-radius: 4px;
-    pointer-events: none;
-    z-index: 1000;
-    margin-bottom: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    cursor: default;
 }

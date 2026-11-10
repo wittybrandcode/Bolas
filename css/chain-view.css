@@ -1,339 +1,223 @@
 /* ═══════════════════════════════════════════════════════════════
-   BolasPro v5.0 - Chain View Component
-   Timeline Display inside Bolas Grid
+   BolasPro v5.0 - SGD Pro Chain View
+   Color-Coded Banks, Technical Timeline Cards, Zero-Radius
    ═══════════════════════════════════════════════════════════════ */
 
-/* ─────────────────────────────────────────────────────────────
-   Chain Content Container
-   ───────────────────────────────────────────────────────────── */
 .chain-content {
-    padding: var(--gap-sm);
     display: none;
+    padding: 6px;
 }
 
 .chain-content.active {
-    display: block;
-    animation: fadeIn 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Chain Toolbar
+   Color-Coded Chain Toolbars
    ───────────────────────────────────────────────────────────── */
 .chain-toolbar {
     display: flex;
-    gap: var(--gap-xs);
-    padding: var(--gap-sm);
-    background: var(--bg-darkest);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--gap-sm);
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    background: var(--sgd-bg-void);
+    border: 1px solid var(--sgd-border-default);
+}
+
+/* Tools Bank: Cyan */
+.chain-tools-bank-cyan {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    background: var(--cyan-bank-bg);
+    border: 1px solid var(--cyan-bank-border);
+    border-top: 2px solid var(--sgd-cat-tools-cyan);
+}
+
+/* Show/Hide Bank: Radiant Green */
+.chain-tools-bank-green {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    background: var(--green-bank-bg);
+    border: 1px solid var(--green-bank-border);
+    border-top: 2px solid var(--sgd-brand-green);
+}
+
+/* Presets Bank: Amber */
+.chain-tools-bank-amber {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    background: var(--amber-bank-bg);
+    border: 1px solid var(--amber-bank-border);
+    border-top: 2px solid var(--sgd-cat-zoom-amber);
+}
+
+/* Danger Bank: Crimson */
+.chain-tools-bank-crimson {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    background: var(--crimson-bank-bg);
+    border: 1px solid var(--crimson-bank-border);
+    border-top: 2px solid var(--sgd-cat-live-crimson);
 }
 
 .chain-tool-btn {
-    flex: 1;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--bg-light);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    color: var(--text-dim);
-    cursor: pointer;
-    font-size: 13px;
-    transition: all var(--transition);
-    position: relative;
-    overflow: hidden;
-}
-
-.chain-tool-btn:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
-    border-color: var(--border-light);
-}
-
-.chain-tool-btn.danger:hover {
-    background: var(--red-dim);
-    border-color: var(--red);
-    color: var(--red);
-}
-
-/* ─────────────────────────────────────────────────────────────
-   Chain Timeline
-   ───────────────────────────────────────────────────────────── */
-.chain-timeline {
-    position: relative;
-    padding-left: 0;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.chain-timeline::-webkit-scrollbar {
-    width: 4px;
-}
-
-.chain-timeline::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.chain-timeline::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 2px;
-}
-
-/* Vertical Connecting Line */
-.chain-line {
-    position: absolute;
-    left: 19px;
-    top: 20px;
-    bottom: 20px;
-    width: 2px;
-    background: linear-gradient(
-        180deg,
-        var(--gold) 0%,
-        var(--border) 30%,
-        var(--border) 100%
-    );
-    border-radius: 1px;
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   Chain Item
-   ───────────────────────────────────────────────────────────── */
-.chain-item {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-md);
-    padding: var(--gap-sm) var(--gap-sm);
-    position: relative;
-    cursor: pointer;
-    transition: all var(--transition);
-    border-radius: var(--radius-sm);
-    z-index: 1;
-    pointer-events: auto;
-}
-
-.chain-item * {
-    pointer-events: none;
-}
-
-.chain-item:hover {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-/* ─────────────────────────────────────────────────────────────
-   Chain Marker
-   ───────────────────────────────────────────────────────────── */
-.chain-marker {
     width: 26px;
     height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-light);
-    border: 2px solid var(--border);
-    border-radius: 50%;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 2;
-    font-size: 11px;
-    color: var(--text-dim);
-    transition: all 0.2s ease;
-    margin-left: 6px;
+    background: var(--slate-btn-bg);
+    border: 1px solid var(--sgd-border-subtle);
+    color: var(--sgd-text-secondary);
+    cursor: pointer;
+    font-size: 13px;
+    transition: all var(--transition);
 }
 
-.chain-num {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text-secondary);
+.chain-tool-btn:hover {
+    background: var(--slate-btn-hover);
+    color: #FFFFFF;
 }
 
-/* Hunter Marker - Root Hunter (First in chain) */
-.chain-item.root-hunter .chain-marker {
-    background: linear-gradient(135deg, var(--gold) 0%, #d4922a 100%);
-    border-color: var(--gold);
-    box-shadow: var(--shadow-glow-gold), 0 2px 4px rgba(0,0,0,0.3);
+.chain-tool-btn.cyan-btn {
+    background: var(--cyan-btn-bg);
+    border-color: var(--cyan-bank-border);
+    color: var(--cyan-btn-text);
+}
+.chain-tool-btn.cyan-btn:hover {
+    background: var(--cyan-btn-hover);
+    color: #FFFFFF;
 }
 
-.chain-item.root-hunter .chain-marker i {
-    font-size: 14px;
-    color: #1a1a1a;
+.chain-tool-btn.green-btn {
+    background: var(--green-btn-bg);
+    border-color: var(--green-bank-border);
+    color: var(--green-btn-text);
+}
+.chain-tool-btn.green-btn:hover {
+    background: var(--green-btn-hover);
+    color: #FFFFFF;
+}
+.chain-tool-btn.green-btn.active {
+    background: var(--sgd-brand-green);
+    color: var(--sgd-brand-dark);
 }
 
-/* Hunter+Prey Marker (Middle items) */
-.chain-item.hunter-prey .chain-marker {
-    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-    border-color: #f97316;
-    box-shadow: 0 0 8px rgba(249, 115, 22, 0.3), 0 2px 4px rgba(0,0,0,0.3);
+.chain-tool-btn.amber-btn {
+    background: var(--amber-btn-bg);
+    border-color: var(--amber-bank-border);
+    color: var(--amber-btn-text);
+}
+.chain-tool-btn.amber-btn:hover {
+    background: var(--amber-btn-hover);
+    color: #FFFFFF;
 }
 
-.chain-item.hunter-prey .chain-marker i {
-    font-size: 12px;
-    color: #1a1a1a;
+.chain-tool-btn.crimson-btn {
+    background: var(--crimson-btn-bg);
+    border-color: var(--crimson-bank-border);
+    color: var(--crimson-btn-text);
 }
-
-/* Pure Prey Marker (Last in chain) */
-.chain-item.prey .chain-marker {
-    background: var(--bg-light);
-    border-color: var(--border);
-}
-
-.chain-item.prey .chain-num {
-    color: var(--text-secondary);
-}
-
-/* Selected Marker */
-.chain-item.selected .chain-marker {
-    background: linear-gradient(135deg, var(--green) 0%, #22c55e 100%);
-    border-color: var(--green);
-    box-shadow: var(--shadow-glow-green), 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.chain-item.selected .chain-num,
-.chain-item.selected .chain-marker i {
-    color: #1a1a1a;
+.chain-tool-btn.crimson-btn:hover {
+    background: var(--crimson-btn-hover);
+    color: #FFFFFF;
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Chain Info
+   Chain Timeline Items
    ───────────────────────────────────────────────────────────── */
-.chain-info {
-    flex: 1;
+.chain-timeline {
     display: flex;
     flex-direction: column;
-    gap: 1px;
-    min-width: 0;
+    gap: 3px;
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 2px;
 }
 
-.chain-name {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.chain-role {
-    font-size: 9px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Root Hunter Info */
-.chain-item.root-hunter .chain-name {
-    color: var(--gold);
-}
-
-.chain-item.root-hunter .chain-role {
-    color: var(--gold);
-    opacity: 0.7;
-}
-
-/* Hunter+Prey Info (Middle) */
-.chain-item.hunter-prey .chain-name {
-    color: #f97316;
-}
-
-.chain-item.hunter-prey .chain-role {
-    color: #f97316;
-    opacity: 0.7;
-}
-
-/* Pure Prey Info */
-.chain-item.prey .chain-name {
-    color: var(--text-primary);
-}
-
-.chain-item.prey .chain-role {
-    color: var(--text-dim);
-}
-
-/* Selected Info */
-.chain-item.selected .chain-name {
-    color: var(--green);
-}
-
-.chain-item.selected .chain-role {
-    color: var(--green);
-    opacity: 0.8;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   Chain Indicator (Pulsing Dot)
-   ───────────────────────────────────────────────────────────── */
-.chain-indicator {
-    width: 6px;
-    height: 6px;
-    background: var(--green);
-    border-radius: 50%;
-    animation: pulse 1.5s ease-in-out infinite;
-    box-shadow: 0 0 8px var(--green);
-}
-
-/* ─────────────────────────────────────────────────────────────
-   Chain Empty State
-   ───────────────────────────────────────────────────────────── */
-.chain-empty {
+.chain-item {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: var(--gap-sm);
-    padding: var(--gap-xl);
-    color: var(--text-dim);
-}
-
-.chain-empty i {
-    font-size: 28px;
-    opacity: 0.4;
-}
-
-.chain-empty span {
-    font-size: 10px;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   Drag and Drop Chain Reordering (FEAT-01)
-   ───────────────────────────────────────────────────────────── */
-.chain-item[draggable="true"] {
+    gap: 6px;
+    padding: 5px 8px;
+    background: #1C2028;
+    border: 1px solid var(--sgd-border-default);
+    border-left: 3px solid var(--sgd-border-strong);
     cursor: grab;
-    user-select: none;
+    transition: all var(--transition);
 }
 
-.chain-item[draggable="true"]:active {
-    cursor: grabbing;
+.chain-item:hover {
+    background: #242A35;
+    border-color: var(--sgd-cat-tools-cyan);
 }
 
-.chain-item.is-dragging {
-    opacity: 0.35;
-    background: rgba(255, 185, 21, 0.08) !important;
-    border: 1px dashed var(--gold) !important;
+.chain-item.hunter {
+    border-left-color: var(--sgd-brand-green);
+    background: #182016;
+}
+
+.chain-item.prey {
+    border-left-color: var(--sgd-cat-tools-cyan);
+    background: #151F2A;
+}
+
+.chain-item.dragging {
+    opacity: 0.4;
+    border: 1px dashed var(--sgd-cat-tools-cyan);
 }
 
 .chain-item.drag-over {
-    background: rgba(255, 185, 21, 0.18) !important;
-    border-top: 2px solid var(--gold) !important;
-    transform: translateX(4px);
+    border-top: 2px solid var(--sgd-brand-green);
+    background: #202E1E;
 }
 
 .drag-handle-icon {
+    color: var(--sgd-text-muted);
     font-size: 13px;
-    color: var(--text-dim);
-    flex-shrink: 0;
-    opacity: 0.4;
-    transition: opacity var(--transition);
+    cursor: grab;
 }
 
-.chain-item:hover .drag-handle-icon {
-    opacity: 1;
-    color: var(--gold);
+.chain-marker {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
-.chain-tool-btn.active {
-    background: var(--gold-dim) !important;
-    border-color: var(--gold) !important;
-    color: var(--gold) !important;
+.marker-badge {
+    padding: 1px 4px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.marker-badge.hunter {
+    background: var(--sgd-brand-green);
+    color: var(--sgd-brand-dark);
+}
+
+.marker-badge.prey {
+    background: var(--sgd-cat-tools-cyan);
+    color: #09131C;
+}
+
+.chain-name {
+    flex: 1;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--sgd-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

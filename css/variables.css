@@ -1,103 +1,132 @@
 /* ═══════════════════════════════════════════════════════════════
-   BolasPro v5.0 - CSS Variables (Design System)
-   Adobe-style Dark Theme with Bolas Grid
+   BolasPro v5.0 - SGD Pro Design System Tokens
+   Based on SGD_AE_UI_DESIGN_SKILL.md (Zero-Radius & Broadcast Charcoal)
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
     /* ─────────────────────────────────────────────────────────────
-       Background Colors (Adobe Dark Theme)
+       A. Brand Signature (Radiant Cyber Green)
        ───────────────────────────────────────────────────────────── */
-    --bg-darkest: #1a1a1a;
-    --bg-dark: #232323;
-    --bg-medium: #2a2a2a;
-    --bg-light: #363636;
-    --bg-hover: #404040;
-    --bg-active: #4a4a4a;
+    --sgd-brand-green: #8CC63F;
+    --sgd-brand-glow: rgba(140, 198, 63, 0.38);
+    --sgd-brand-dark: #0E1706;
 
     /* ─────────────────────────────────────────────────────────────
-       Accent Colors
+       B. 5-Tier Charcoal Surfaces
        ───────────────────────────────────────────────────────────── */
-    --accent: #0d99ff;
-    --accent-hover: #3dabff;
-    --accent-dim: rgba(13, 153, 255, 0.15);
+    --sgd-bg-void: #14171C;       /* Deepest Void: Inputs, Grids well, Terminal */
+    --sgd-bg-stage: #1E2126;      /* Main window background */
+    --sgd-bg-app: #22252A;        /* App body surface */
+    --sgd-bg-sidebar: #242830;    /* Sidebar and control cards */
+    --sgd-bg-header: #2A2E37;     /* Header & bottom bars */
+    --sgd-bg-popover: #1F232B;    /* Modals & dropdowns */
+
+    /* Legacy mapping for compatibility */
+    --bg-darkest: var(--sgd-bg-void);
+    --bg-dark: var(--sgd-bg-stage);
+    --bg-medium: var(--sgd-bg-sidebar);
+    --bg-light: #2D323C;
+    --bg-hover: #363C48;
+    --bg-active: #404756;
+
+    /* ─────────────────────────────────────────────────────────────
+       C. Technical Borders & Hairlines
+       ───────────────────────────────────────────────────────────── */
+    --sgd-border-subtle: #3A3E47;
+    --sgd-border-default: #434853;
+    --sgd-border-strong: #494F5C;
+    --border: var(--sgd-border-default);
+    --border-light: var(--sgd-border-strong);
+    --border-focus: var(--sgd-cat-tools-cyan);
+
+    /* ─────────────────────────────────────────────────────────────
+       D. Typography & Tactile Text
+       ───────────────────────────────────────────────────────────── */
+    --sgd-text-primary: #DCE0E8;
+    --sgd-text-secondary: #B8BEC9;
+    --sgd-text-muted: #8E95A2;
+    --sgd-text-dark: #1C1E22;
     
-    --gold: #e8a634;
-    --gold-hover: #f0b84a;
-    --gold-dim: rgba(232, 166, 52, 0.15);
+    --text-primary: var(--sgd-text-primary);
+    --text-secondary: var(--sgd-text-secondary);
+    --text-dim: var(--sgd-text-muted);
+    --text-bright: #FFFFFF;
+
+    /* ─────────────────────────────────────────────────────────────
+       E. Color-Coded Icon Banks
+       ───────────────────────────────────────────────────────────── */
+    /* 1. Tools, Rigging & Files — Cyan */
+    --sgd-cat-tools-cyan: #38BDF8;
+    --cyan-bank-bg: #14202B;
+    --cyan-bank-border: #263E52;
+    --cyan-btn-bg: #1B2C3B;
+    --cyan-btn-hover: #274056;
+    --cyan-btn-text: #7DD3FC;
+
+    /* 2. Show/Hide & Connection Status — Radiant Green */
+    --sgd-cat-visibility-green: #8CC63F;
+    --green-bank-bg: #162011;
+    --green-bank-border: #304622;
+    --green-btn-bg: #1D2817;
+    --green-btn-hover: #2A3B21;
+    --green-btn-text: #8CC63F;
+
+    /* 3. Presets & Motion Physics — Amber Gold */
+    --sgd-cat-zoom-amber: #F59E0B;
+    --amber-bank-bg: #241C11;
+    --amber-bank-border: #4D391D;
+    --amber-btn-bg: #332615;
+    --amber-btn-hover: #47351D;
+    --amber-btn-text: #FCD34D;
+
+    /* 4. History, Undo/Redo & System — Slate Silver */
+    --sgd-cat-history-slate: #94A3B8;
+    --slate-bank-bg: #1D2028;
+    --slate-bank-border: #3B4252;
+    --slate-btn-bg: #282D38;
+    --slate-btn-hover: #373E4D;
+    --slate-btn-text: #CBD5E1;
+
+    /* 5. Stage & Viewport Views — Violet */
+    --sgd-cat-stage-violet: #A855F7;
     
-    --green: #4ade80;
-    --green-hover: #6ee7a0;
-    --green-dim: rgba(74, 222, 128, 0.15);
-    
-    --red: #ef4444;
-    --red-hover: #f87171;
-    --red-dim: rgba(239, 68, 68, 0.15);
-    
-    --orange: #fb923c;
-    --purple: #a78bfa;
-    --cyan: #06b6d4;
+    /* 6. Critical & Break Actions — Broadcast Crimson */
+    --sgd-cat-live-crimson: #F43F5E;
+    --crimson-bank-bg: #29141C;
+    --crimson-bank-border: #5E283A;
+    --crimson-btn-bg: #3B1B25;
+    --crimson-btn-hover: #522433;
+    --crimson-btn-text: #FDA4AF;
+    --crimson-btn-active: #E11D48;
 
     /* ─────────────────────────────────────────────────────────────
-       Text Colors
+       F. ZERO-RADIUS GEOMETRY CONSTITUTION (0px EVERYWHERE)
        ───────────────────────────────────────────────────────────── */
-    --text-primary: #d4d4d4;
-    --text-secondary: #9ca3af;
-    --text-dim: #6b7280;
-    --text-bright: #ffffff;
+    --radius-xs: 0px;
+    --radius-sm: 0px;
+    --radius-md: 0px;
+    --radius-lg: 0px;
+    --radius-xl: 0px;
 
     /* ─────────────────────────────────────────────────────────────
-       Border Colors
+       G. Sizing & Spacing
        ───────────────────────────────────────────────────────────── */
-    --border: #3f3f3f;
-    --border-light: #525252;
-    --border-focus: var(--accent);
+    --header-h: 38px;
+    --status-h: 24px;
+    --panel-width: 300px;
 
-    /* ─────────────────────────────────────────────────────────────
-       Shadows
-       ───────────────────────────────────────────────────────────── */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
-    --shadow-glow-accent: 0 0 12px var(--accent-dim);
-    --shadow-glow-gold: 0 0 12px var(--gold-dim);
-    --shadow-glow-green: 0 0 12px var(--green-dim);
-
-    /* ─────────────────────────────────────────────────────────────
-       Sizing
-       ───────────────────────────────────────────────────────────── */
-    --header-h: 32px;
-    --status-h: 22px;
-    --panel-width: 320px;
-
-    /* ─────────────────────────────────────────────────────────────
-       Border Radius
-       ───────────────────────────────────────────────────────────── */
-    --radius-xs: 2px;
-    --radius-sm: 3px;
-    --radius-md: 5px;
-    --radius-lg: 8px;
-    --radius-xl: 12px;
-
-    /* ─────────────────────────────────────────────────────────────
-       Spacing
-       ───────────────────────────────────────────────────────────── */
     --gap-xs: 2px;
     --gap-sm: 4px;
     --gap-md: 8px;
     --gap-lg: 12px;
-    --gap-xl: 16px;
 
-    /* ─────────────────────────────────────────────────────────────
-       Transitions
-       ───────────────────────────────────────────────────────────── */
-    --transition-fast: 0.1s ease;
-    --transition: 0.15s ease;
-    --transition-slow: 0.25s ease;
+    --font-ui: "Segoe UI", "IBM Plex Sans Arabic", -apple-system, sans-serif;
+    --font-mono: "JetBrains Mono", "IBM Plex Mono", "Consolas", monospace;
 
-    /* ─────────────────────────────────────────────────────────────
-       Tab Colors (for Bolas Grid)
-       ───────────────────────────────────────────────────────────── */
-    --tab-setup: #4ade80;
-    --tab-anchor: #e8a634;
-    --tab-chain: #f472b6;
+    --transition: 0.12s ease-out;
+}
+
+/* Enforce 0px radius across ALL elements */
+*, *::before, *::after {
+    border-radius: 0px !important;
 }

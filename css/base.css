@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
-   BolasPro v5.0 - Base Styles
-   Reset, Typography, Layout
+   BolasPro v5.0 - SGD Pro Base Styles
+   Zero-Radius, Broadcast Palette, Technical Layout
    ═══════════════════════════════════════════════════════════════ */
 
 /* Reset */
@@ -8,73 +8,100 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    border-radius: 0px !important;
+    outline: none;
 }
 
-/* Body */
 body {
-    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-ui);
     font-size: 11px;
     line-height: 1.4;
-    color: var(--text-primary);
-    background: var(--bg-darkest);
+    color: var(--sgd-text-primary);
+    background: var(--sgd-bg-void);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     user-select: none;
     overflow: hidden;
 }
 
-/* App Container */
 .app {
     width: 100%;
     min-width: var(--panel-width);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: var(--bg-dark);
+    background: var(--sgd-bg-stage);
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Header
+   Technical Header with Telemetry Box
    ───────────────────────────────────────────────────────────── */
 .header {
     height: var(--header-h);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 var(--gap-md);
-    background: linear-gradient(180deg, #2d2d2d 0%, #262626 100%);
-    border-bottom: 1px solid var(--border);
+    padding: 0 8px;
+    background: var(--sgd-bg-header);
+    border-bottom: 1px solid var(--sgd-border-default);
     flex-shrink: 0;
+    gap: 6px;
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: var(--gap-sm);
+    gap: 6px;
 }
 
+/* Brand Badge: Spider Logo Container */
 .logo {
-    width: 22px;
-    height: 22px;
+    height: 26px;
+    padding: 0 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--gold) 0%, #d4922a 100%);
-    border-radius: var(--radius-sm);
-    color: var(--bg-darkest);
-    font-size: 12px;
+    gap: 5px;
+    background: #181B20;
+    border: 1px solid rgba(140, 198, 63, 0.65);
+    color: var(--sgd-brand-green);
+    cursor: default;
+    transition: all var(--transition);
+}
+
+.logo:hover {
+    border-color: var(--sgd-brand-green);
+    box-shadow: 0 0 8px var(--sgd-brand-glow);
+}
+
+.logo i {
+    font-size: 14px;
+    color: var(--sgd-brand-green);
 }
 
 .logo-text {
-    font-weight: 600;
-    font-size: 12px;
-    color: var(--text-bright);
-    letter-spacing: -0.3px;
+    font-family: var(--font-ui);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--sgd-brand-green);
+    text-shadow: 0 0 6px var(--sgd-brand-glow);
 }
 
 .header-actions {
     display: flex;
-    gap: var(--gap-xs);
+    align-items: center;
+    gap: 3px;
+}
+
+/* Slate Silver Action Bank */
+.header-actions-bank {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    background: var(--slate-bank-bg);
+    border: 1px solid var(--slate-bank-border);
+    border-top: 2px solid var(--sgd-cat-history-slate);
 }
 
 .header-btn {
@@ -83,57 +110,87 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
-    border: none;
-    color: var(--text-dim);
+    background: var(--slate-btn-bg);
+    border: 1px solid var(--sgd-border-subtle);
+    color: var(--slate-btn-text);
     cursor: pointer;
-    border-radius: var(--radius-sm);
-    font-size: 14px;
+    font-size: 13px;
     transition: all var(--transition);
 }
 
 .header-btn:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
+    background: var(--slate-btn-hover);
+    color: #FFFFFF;
+    border-color: var(--sgd-cat-history-slate);
+}
+
+/* Header Telemetry Box (Comp & Layer status) */
+.header-telemetry {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 6px;
+    background: #181A20;
+    border: 1px solid var(--sgd-border-default);
+    font-size: 10px;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+}
+
+.telemetry-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--sgd-brand-green);
+    box-shadow: 0 0 6px var(--sgd-brand-glow);
+}
+
+.telemetry-comp {
+    font-weight: bold;
+    color: var(--sgd-text-primary);
+}
+
+.telemetry-info {
+    color: var(--sgd-cat-tools-cyan);
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Main Content
+   Main Content Layout
    ───────────────────────────────────────────────────────────── */
 .main {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: var(--gap-md);
+    padding: 8px;
     display: flex;
     flex-direction: column;
-    gap: var(--gap-md);
+    gap: 8px;
+    background: var(--sgd-bg-stage);
 }
 
 .main::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
 }
 
 .main::-webkit-scrollbar-track {
-    background: transparent;
+    background: var(--sgd-bg-void);
 }
 
 .main::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 3px;
+    background: var(--sgd-border-default);
 }
 
 .main::-webkit-scrollbar-thumb:hover {
-    background: var(--text-dim);
+    background: var(--sgd-border-strong);
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Footer / Status Bar
+   Technical Footer / Status Bar
    ───────────────────────────────────────────────────────────── */
 .footer {
     flex-shrink: 0;
-    border-top: 1px solid var(--border);
-    background: var(--bg-medium);
+    border-top: 1px solid var(--sgd-border-default);
+    background: var(--sgd-bg-header);
 }
 
 .status-bar {
@@ -141,152 +198,56 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 var(--gap-md);
-    background: var(--bg-darkest);
-    font-size: 9px;
+    padding: 0 8px;
+    background: var(--sgd-bg-void);
+    font-size: 10px;
 }
 
 .status-left {
     display: flex;
     align-items: center;
-    gap: var(--gap-sm);
+    gap: 6px;
 }
 
 .status-indicator {
     width: 6px;
     height: 6px;
-    border-radius: 50%;
-    background: var(--text-dim);
-    transition: all var(--transition);
+    background: var(--sgd-text-muted);
 }
 
 .status-indicator.online {
-    background: var(--green);
-    box-shadow: 0 0 6px var(--green);
+    background: var(--sgd-brand-green);
+    box-shadow: 0 0 6px var(--sgd-brand-glow);
 }
 
 .status-indicator.error {
-    background: var(--red);
-    box-shadow: 0 0 6px var(--red);
+    background: var(--sgd-cat-live-crimson);
 }
 
 .status-indicator.warning {
-    background: var(--orange);
-    box-shadow: 0 0 6px var(--orange);
+    background: var(--sgd-cat-zoom-amber);
 }
 
 .status-message {
-    color: var(--text-secondary);
-}
-
-.status-right {
-    color: var(--text-dim);
+    color: var(--sgd-text-secondary);
+    font-size: 10px;
 }
 
 .status-version {
-    font-family: 'Consolas', monospace;
-    font-size: 9px;
+    font-family: var(--font-mono);
+    color: var(--sgd-text-muted);
+    font-size: 10px;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Utility Classes
-   ───────────────────────────────────────────────────────────── */
-.hidden {
-    display: none !important;
-}
-
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
-/* Focus States */
-button:focus-visible,
-select:focus-visible,
-input:focus-visible {
-    outline: 1px solid var(--accent);
-    outline-offset: 1px;
-}
-
-/* Ripple Effect */
-.ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.25);
-    transform: scale(0);
-    animation: ripple 0.4s ease-out;
-    pointer-events: none;
-}
-
-@keyframes ripple {
-    to {
-        transform: scale(2.5);
-        opacity: 0;
-    }
-}
-
-/* Fade In Animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Pulse Animation */
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.5;
-        transform: scale(1.2);
-    }
-}
-
-/* Spin Animation */
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* RTL Support (FEAT-05) */
+/* RTL Support */
 body.rtl-mode, [dir="rtl"] {
     direction: rtl;
     text-align: right;
-    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
 }
 
-body.rtl-mode .header-left {
-    flex-direction: row;
-}
-
-body.rtl-mode .header-actions {
-    margin-right: auto;
-    margin-left: 0;
-}
-
-body.rtl-mode .chain-item {
-    text-align: right;
-}
-
-body.rtl-mode .drag-handle-icon {
-    margin-right: 0;
-    margin-left: 8px;
-}
-
-body.rtl-mode .modal-close {
-    left: 12px;
-    right: auto;
+body.rtl-mode .telemetry-info,
+body.rtl-mode .status-version,
+body.rtl-mode input[type="number"] {
+    direction: ltr !important;
+    text-align: center;
 }
