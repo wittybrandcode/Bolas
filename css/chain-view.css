@@ -145,10 +145,29 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
-    max-height: 240px;
+    max-height: 200px;
     overflow-y: auto;
-    padding-right: 2px;
+    padding-right: 4px;
     width: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: #2E384A #12151B;
+}
+
+.chain-timeline::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chain-timeline::-webkit-scrollbar-track {
+    background: #12151B;
+    border-left: 1px solid #1C2330;
+}
+
+.chain-timeline::-webkit-scrollbar-thumb {
+    background: #2E384A;
+}
+
+.chain-timeline::-webkit-scrollbar-thumb:hover {
+    background: #0284C7;
 }
 
 .chain-item {

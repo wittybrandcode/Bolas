@@ -12,6 +12,13 @@
     outline: none;
 }
 
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
 body {
     font-family: var(--font-ui);
     font-size: 11px;
@@ -21,15 +28,20 @@ body {
     -webkit-font-smoothing: antialiased;
     user-select: none;
     overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .app {
     width: 100%;
     min-width: var(--panel-width);
-    min-height: 100vh;
+    height: 100%;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     background: var(--sgd-bg-stage);
+    overflow: hidden;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -165,6 +177,7 @@ body {
    ───────────────────────────────────────────────────────────── */
 .main {
     flex: 1;
+    min-height: 0; /* Critical for flex child overflow and scrolling */
     overflow-y: auto;
     overflow-x: hidden;
     padding: 8px;
@@ -172,22 +185,32 @@ body {
     flex-direction: column;
     gap: 8px;
     background: var(--sgd-bg-stage);
+    scrollbar-width: thin;
+    scrollbar-color: #2E384A #12151B;
 }
 
+/* High-Contrast Technical Scrollbar (Zero Radius, High Visibility) */
 .main::-webkit-scrollbar {
-    width: 5px;
+    width: 7px;
 }
 
 .main::-webkit-scrollbar-track {
-    background: var(--sgd-bg-void);
+    background: #12151B;
+    border-left: 1px solid #1C2330;
 }
 
 .main::-webkit-scrollbar-thumb {
-    background: var(--sgd-border-default);
+    background: #2E384A;
+    border: 1px solid #141820;
 }
 
 .main::-webkit-scrollbar-thumb:hover {
-    background: var(--sgd-border-strong);
+    background: #0284C7;
+    box-shadow: 0 0 6px rgba(2, 132, 199, 0.5);
+}
+
+.main::-webkit-scrollbar-thumb:active {
+    background: #38BDF8;
 }
 
 /* ─────────────────────────────────────────────────────────────
